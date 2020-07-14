@@ -5,26 +5,34 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>{% block title %}{{ 'base.landing.title'|trans }}{% endblock %}</title>
+    <title>{% block title %}{{ 'base.admin.title'|trans }}{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.1/css/sb-admin-2.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-
-        <style>
-            .card-deck {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-                grid-gap: .5rem;
-            }
-        </style>
     {% endblock %}
 </head>
-<body class="{% block body_class %}{% endblock %}">
-{% block body %}{% endblock %}
+<body>
+<div id="wrapper">
+    {% include 'components/admin_sidebar.html.twig' %}
+
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            {% include 'components/admin_topbar.html.twig' %}
+
+            <div class="container-fluid">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        {% include 'components/admin_footer.html.twig' %}
+    </div>
+</div>
+
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.1/js/sb-admin-2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
 {% endblock %}
 </body>

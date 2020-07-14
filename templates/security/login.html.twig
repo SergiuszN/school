@@ -1,0 +1,58 @@
+{% extends 'base.landing.html.twig' %}
+
+{% block body_class %}bg-primary{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 col-md-3"></div>
+            <div class="col-12 col-md-6">
+                <div class="jumbotron">
+                    <form method="post" class="text-left">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        <h1 class="display-4 text-center mb-3 font-weight-normal">{{ 'security.login.title'|trans }}</h1>
+
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <label class="text-muted" for="inputEmail">{{ 'security.login.form.email'|trans }}</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-muted" for="inputPassword">{{ 'security.login.form.password'|trans }}</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control" required>
+                        </div>
+
+                        {#
+                            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                            See https://symfony.com/doc/current/security/remember_me.html
+
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" name="_remember_me"> Remember me
+                                </label>
+                            </div>
+                        #}
+
+                        <div class="form-group">
+                            <button class="btn btn-lg rounded-pill btn-primary btn-block" type="submit">
+                                {{ 'security.login.form.signin'|trans }}
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <a href="#">{{ 'security.login.cantLogin'|trans }}</a>
+                            <br>
+                            <a href="#">{{ 'security.login.create'|trans }}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-md-3"></div>
+        </div>
+    </div>
+{% endblock %}
