@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="#">{{ 'component.header.brand'|trans }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">{{ 'component.header.menu.home'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ 'component.header.menu.events'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">{{ 'component.header.menu.news'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link pl-md-4" style="position: relative" href="#">
+                        <span class="material-icons d-inline-flex d-none d-md-inline" style="position: absolute; left: 0">account_circle</span>
+                        {{ 'component.header.menu.login'|trans }}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

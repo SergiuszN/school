@@ -1,0 +1,185 @@
+{% extends 'base.landing.html.twig' %}
+
+{% block body %}
+    {% include 'components/header.html.twig' %}
+
+    <section class="pt-3 pb-3 pt-md-5 pb-md-5">
+        <div class="pt-md-5 pb-md-5 mx-auto text-center" style="max-width: 700px">
+            <h1 class="display-4 font-weight-bold">{{ 'landing.home.title'|trans }}</h1>
+            <p class="lead">{{ 'landing.home.lead'|trans }}</p>
+            <p class="lead font-weight-bold">{{ 'landing.home.meta'|trans }}</p>
+        </div>
+    </section>
+
+    <section class="pt-3 pb-3 pt-md-5 pb-md-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="pt-2">
+                        <p>Бізнес-тренер Наталія Ніколенко</p>
+                        <p>Сертифікований бухгалтер – практик, САР</p>
+
+                        <dl>
+                            <dd>Диплом ACCA DipIFR</dd>
+                            <dd>20 років практичної бухгалтерії</dd>
+                            <dd>10+ сфер бізнесу</dd>
+                        </dl>
+
+                        <p>
+                            Власник он-лайн школи професійного розвитку та особистої ефективності
+                            Автор навчальних курсів «Податки», «Фінансовий облік за МСФО»,
+                            «Управлінський облік для бухгалтера»,
+                            Автор он-лайн програми «Особиста ефективність та професійне зростання»
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 d-none d-inline text-center">
+                    <img style="max-width: 300px" class="rounded-circle img-fluid img-thumbnail" src="https://placeimg.com/640/640/nature?t=1594665547688" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pt-3 pb-3 pt-md-5 pb-md-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 text-center">
+                    <img style="max-width: 330px" class="img-fluid" src="https://placeimg.com/500/500/tech" alt="">
+                </div>
+                <div class="col-12 col-md-6">
+                    <p class="lead font-weight-bold">Вам будуть корисні наші тренінги і курси, якщо ви бажаєте:</p>
+                    <ul>
+                        <li>бути висококваліфікованим спеціалістом</li>
+                        <li>мати власну професійну думку</li>
+                        <li>стати лідером у своїй справі</li>
+                        <li>успішно будувати кар’єру</li>
+                        <li>використовувати тайм-менеджмент для ефективного розподілу часу на роботу та особисте життя</li>
+                        <li>навчитися планувати та вийти з хаосу незакінчених справ</li>
+                    </ul>
+
+                    <p>
+                        <strong>Моя місія</strong> – підвищення цінності професії «бухгалтер», шляхом навчання
+                        спеціалістів з обліку до рівня професійного бухгалтера, який бачить за цифрами
+                        реальний світ економіки
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pt-3 pb-3 pt-md-5 pb-md-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <p class="lead font-weight-bold">Як проходять наші тренінги?</p>
+
+                    <p>В вашому особистому кабінеті ви переглядаєте відео уроки та отримуєте домашні завдання</p>
+                    <p>Щотижня проходять он-лайн відео сесії з лектором, які присвячуються розбору практичних завдань</p>
+                    <p>Закритий чат для спілкування учасників та відповідей на запитання</p>
+                    <p>По закінченню тренінгу обов’язкова контрольна робота</p>
+                    <p>Сертифікат чекає на кандидатів, які успішно виконали контрольну роботу</p>
+                </div>
+                <div class="col-12 col-md-6 text-center">
+                    <img style="max-width: 330px" class="img-fluid" src="https://placeimg.com/500/500/arch" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pt-3 pb-3 pt-md-5 pb-md-5">
+        <div class="container text-center">
+            <p class="lead display-3 mb-4">Найближчі події</p>
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center" style="height: 140px">
+                        <h4 class="my-0 font-weight-normal">Вебінар «Особиста ефективність та професійне зростання. 10 кроків»</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="display-3 lead font-weight-bold">₴0</p>
+                        <p>
+                            <span class="text-muted">22 серпня 2020 року, 13.00 і 18.00</span>
+
+                            <br><br>
+
+                            Вебінар буде корисний бухгалтерам, які прагнуть вийти на новий рівень у
+                            професіональній сфері життя, навчитись планувати та досягати поставленої
+                            цілі. Ми розглянемо 10 кроків, які потрібно зробити для того щоб дійти з
+                            крапки «А» де ви зараз до крапки «Б» де ви хочете бути.
+
+                            <br>
+                            <br>
+                        </p>
+                        <button type="button" class="btn btn-lg btn-block btn-primary">Дізнатись більш детально</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header d-flex align-items-center" style="height: 140px">
+                        <h4 class="my-0 font-weight-normal">Тренінг з курсу «Фінансовий облік за МСФО»</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="display-3 lead font-weight-bold">₴1000</p>
+                        <p>
+                            <span class="text-muted">12 вересня 2020 року</span>
+
+                            <br><br>
+
+                            Тренінг для фахівців, які планують успішно скласти іспит з дисципліни
+                            «Фінансовий облік – 1» , бухгалтерів які хочуть познайомитись з МСФО, або
+                            розширити свої знання у сфері бухгалтерського обліку за міжнародними
+                            стандартами фінансової звітності.
+
+                            <br>
+                            <br>
+                        </p>
+                        <button type="button" class="btn btn-lg btn-block btn-primary">Дізнатись більш детально</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header d-flex align-items-center" style="height: 140px">
+                        <h4 class="my-0 font-weight-normal">Тренінг з курсу «Податки в Україні»</h4>
+                    </div>
+                    <div class="card-body position-relative">
+                        <p class="display-3 lead font-weight-bold">₴5000</p>
+                        <p>
+                            <span class="text-muted">20 вересня 2020 року</span>
+
+                            <br><br>
+
+                            Тренінг ідеально підійде фахівцям, які планують успішно скласти іспит з
+                            дисципліни «Податки», бухгалтерам які бажають підвищити рівень знань у
+                            податковому обліку до професійного, а також фахівцям фінансової сфери,
+                            підприємцям те керівникам які прагнуть осягнути складний світ податків та
+                            податкової системи України.
+                        </p>
+                        <button type="button" class="btn btn-lg btn-block btn-primary">Дізнатись більш детально</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pt-3 pb-3 pt-md-5 pb-md-5 bg-light">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-4 text-center">Зв'язатися з нами</h1>
+                <form>
+                    <div class="form-group">
+                        <label for="contact-name">Ім’я</label>
+                        <input type="text" class="form-control" id="contact-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-email">Email</label>
+                        <input type="email" class="form-control" id="contact-email">
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-question">Питання</label>
+                        <textarea class="form-control" id="contact-question"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Надіслати</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    {% include 'components/footer.html.twig' %}
+{% endblock %}
