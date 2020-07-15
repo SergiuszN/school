@@ -25,3 +25,28 @@ security:
         title: 'Вхід'
         cantLogin: 'Не вдається увійти?'
         create: 'Створити скриньку'
+admin:
+    event:
+        create:
+            success: 'Нова подія успішно створена'
+            form:
+                name: 'Назва'
+                date: 'Дата'
+                price: 'Ціна'
+                preview: "Прев'ю"
+                description: 'Опис'
+                submit: 'Створити'
+        edit:
+            success: 'Нова подія успішно змінена'
+            form:
+                name: 'Назва'
+                date: 'Дата'
+                price: 'Ціна'
+                preview: "Прев'ю"
+                description: 'Опис'
+                submit: 'Змінити'
+        remove:
+            success: 'Подія успішно видалена'
+        list:
+            confirm:
+                remove: 'Чи справді ви бажаєте видалити цю подію?'

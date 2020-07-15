@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Event;
+use App\Form\EventCreateType;
+use App\Form\EventEditType;
+use App\Repository\EventRepository;
+use App\Util\FakeTranslator;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
+/**
+ * @Route("/admin/event")
+ */
+class AdminEventController extends AbstractController
+{
+    /**
+     * @Route("s", name="admin_event_list")
+     */
+    public function list(EventRepository $eventRepository)
+    {
+        return $this->render('admin/event/list.html.twig', [
+            'events' => $eventRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/create", name="admin_event_create")
+     */
+    public function create(Request $request, EntityManagerInterface $em)
+    {
+        $form = $this->createForm(EventCreateType::class)
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($form->getData());
+            $em->flush();
+            $this->addFlash('success', (new FakeTranslator())->trans('admin.event.create.success'));
+            return $this->redirectToRoute('admin_event_list');
+        }
+
+        return $this->render('admin/event/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/edit/{event}", name="admin_event_edit")
+     */
+    public function edit(Event $event, Request $request, EntityManagerInterface $em)
+    {
+        $form = $this->createForm(EventEditType::class, $event)
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', (new FakeTranslator())->trans('admin.event.edit.success'));
+            return $this->redirectToRoute('admin_event_list');
+        }
+
+        return $this->render('admin/event/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/remove/{event}", name="admin_event_remove")
+     */
+    public function remove(Event $event, EntityManagerInterface $em)
+    {
+        $em->remove($event);
+        $em->flush();
+        $this->addFlash('success', (new FakeTranslator())->trans('admin.event.remove.success'));
+        return $this->redirectToRoute('admin_event_list');
+    }
+}

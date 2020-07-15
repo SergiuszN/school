@@ -92,272 +92,71 @@
         <div class="container text-center">
             <p class="lead display-3 mb-4">Найближчі події</p>
             <div class="card-deck">
-                <div class="card position-relative pb-5">
-                    <div class="card-header d-flex align-items-center" style="height: 140px">
-                        <h4 class="my-0 font-weight-normal">Вебінар «Особиста ефективність та професійне зростання. 10 кроків»</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="display-3 lead font-weight-bold">₴0</p>
-                        <p>
-                            <span class="text-muted">22 серпня 2020 року, 13.00 і 18.00</span>
+                {% for event in events %}
+                    <div class="card position-relative pb-5">
+                        <div class="card-header d-flex align-items-center" style="height: 140px">
+                            <h4 class="my-0 font-weight-normal">{{ event.name }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="display-3 lead font-weight-bold">₴{{ event.price }}</p>
+                            <p>
+                                <span class="text-muted">{{ event.date|date('d-m-Y') }}</span>
 
-                            <br><br>
+                                <br><br>
 
-                            Вебінар буде корисний бухгалтерам, які прагнуть вийти на новий рівень у
-                            професіональній сфері життя, навчитись планувати та досягати поставленої
-                            цілі. Ми розглянемо 10 кроків, які потрібно зробити для того щоб дійти з
-                            крапки «А» де ви зараз до крапки «Б» де ви хочете бути.
-                        </p>
-                        <button
-                                style="width: calc(100% - 40px); bottom: 20px"
-                                type="button"
-                                data-toggle="modal"
-                                data-target="#card-1"
-                                class="btn btn-block btn-primary position-absolute">
-                            Дізнатись більш детально
-                        </button>
-                    </div>
+                                {{ event.preview }}
+                            </p>
+                            <button
+                                    style="width: calc(100% - 40px); bottom: 20px"
+                                    type="button"
+                                    data-toggle="modal"
+                                    data-target="#card-{{ event.id }}"
+                                    class="btn btn-block btn-primary position-absolute">
+                                Дізнатись більш детально
+                            </button>
+                        </div>
 
-                    <div class="modal fade" id="card-1" tabindex="-1" role="dialog" aria-labelledby="card-1" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        Вебінар «Особиста ефективність та професійне зростання. 10 кроків»
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        Відбудеться 22 серпня 2020 року,
-                                        <br><br>
-                                        Кожен може вибрати більш зручний для себе час 13.00 або 18.00
-                                        <br><br>
-                                        Участь безкоштовна
-                                        <br><br>
-                                        Ви дізнаєтесь про 10 кроків, які потрібно зробити для того щоб дійти з крапки
-                                        «А» де ви зараз до крапки «Б» де ви хочете бути. Отримаєте дієві інструменти,
-                                        застосувавши які, ви зможете самостійно крокувати вперед до своїх цілей.
-                                    </p>
+                        <div class="modal fade" id="card-{{ event.id }}" tabindex="-1" role="dialog" aria-labelledby="card-1" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">
+                                            {{ event.name }}
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{ event.description|raw }}
 
-                                    <div class="border-top mb-2"></div>
+                                        <div class="border-top mb-2"></div>
 
-                                    <form action="" style="max-width: 500px" class="m-auto">
-                                        <p class="lead">Зареєструватись</p>
+                                        <form action="" style="max-width: 500px" class="m-auto">
+                                            <p class="lead">Зареєструватись</p>
 
-                                        <div class="form-group">
-                                            <label for="card-1-name" class="form-label">Ім’я</label>
-                                            <input type="text" id="card-1-name" name="card-1-name" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="card-1-email" class="form-label">Email</label>
-                                            <input type="email" id="card-1-email" name="card-1-email" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="card-1-phone" class="form-label">Телефон</label>
-                                            <input type="text" id="card-1-phone" name="card-1-phone" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Зареєструватись</button>
-                                        </div>
-                                    </form>
+                                            <div class="form-group">
+                                                <label for="card-{{ event.id }}-name" class="form-label">Ім’я</label>
+                                                <input type="text" id="card-{{ event.id }}-name" name="card-name" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="card-{{ event.id }}-email" class="form-label">Email</label>
+                                                <input type="email" id="card-{{ event.id }}-email" name="card-email" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="card-{{ event.id }}-phone" class="form-label">Телефон</label>
+                                                <input type="text" id="card-{{ event.id }}-phone" name="card-phone" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block">Зареєструватись</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card position-relative pb-5">
-                    <div class="card-header d-flex align-items-center" style="height: 140px">
-                        <h4 class="my-0 font-weight-normal">Тренінг з курсу «Фінансовий облік за МСФО»</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="display-3 lead font-weight-bold">₴1000</p>
-                        <p>
-                            <span class="text-muted">12 вересня 2020 року</span>
-
-                            <br><br>
-
-                            Тренінг для фахівців, які планують успішно скласти іспит з дисципліни
-                            «Фінансовий облік – 1» , бухгалтерів які хочуть познайомитись з МСФО, або
-                            розширити свої знання у сфері бухгалтерського обліку за міжнародними
-                            стандартами фінансової звітності.
-                        </p>
-                        <button
-                                style="width: calc(100% - 40px); bottom: 20px"
-                                type="button"
-                                data-toggle="modal"
-                                data-target="#card-2"
-                                class="btn btn-block btn-primary position-absolute">
-                            Дізнатись більш детально
-                        </button>
-                    </div>
-
-                    <div class="modal fade" id="card-2" tabindex="-1" role="dialog" aria-labelledby="card-2" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        Тренінг з курсу «Фінансовий облік за МСФО»
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        Старт 12 вересня 2020 року
-
-                                        Формат проведення: дистанційне з доступом до навчання 24/7
-
-                                        Обсяг курсу 64 години
-
-                                        Фокус на мультиформатне навчання яке поєднує відео уроки з теоретичним
-                                        матеріалом, домашнє завдання, перевірку якого здійснює особисто лектор, он-
-                                        лайн відео сесії з закріпленням теоретичного матеріалу та вирішенням
-                                        практичних задач. Контрольна робота по закінченню тренінгу є обов’язковою
-
-                                        для отримання сертифікату.
-                                        На вас чекає:
-                                        10 он-лайн відео сесій
-
-                                        Щосуботи з 12.09.2020 по 14.11.2020
-
-                                        тривалість 4 години
-                                        час 10.00 – 14.00
-
-                                        4 он-лайн відео сесії для відповіді на запитання по 1 годині
-
-                                        40 відео уроків по 30 хвилин
-                                        закритий чат з відповідями на запитання
-
-                                        контрольна робота
-
-                                        сертифікат про успішну участь у тренінгу з курсу
-                                    </p>
-
-                                    <div class="border-top mb-2"></div>
-
-                                    <form action="" style="max-width: 500px" class="m-auto">
-                                        <p class="lead">Зареєструватись</p>
-
-                                        <div class="form-group">
-                                            <label for="card-2-name" class="form-label">Ім’я</label>
-                                            <input type="text" id="card-2-name" name="card-2-name" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="card-2-email" class="form-label">Email</label>
-                                            <input type="email" id="card-2-email" name="card-2-email" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="card-2-phone" class="form-label">Телефон</label>
-                                            <input type="text" id="card-2-phone" name="card-2-phone" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Зареєструватись</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card position-relative pb-5">
-                    <div class="card-header d-flex align-items-center" style="height: 140px">
-                        <h4 class="my-0 font-weight-normal">Тренінг з курсу «Податки в Україні»</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="display-3 lead font-weight-bold">₴5000</p>
-                        <p>
-                            <span class="text-muted">20 вересня 2020 року</span>
-
-                            <br><br>
-
-                            Тренінг ідеально підійде фахівцям, які планують успішно скласти іспит з
-                            дисципліни «Податки», бухгалтерам які бажають підвищити рівень знань у
-                            податковому обліку до професійного, а також фахівцям фінансової сфери,
-                            підприємцям те керівникам які прагнуть осягнути складний світ податків та
-                            податкової системи України.
-                        </p>
-                        <button
-                                style="width: calc(100% - 40px); bottom: 20px"
-                                type="button"
-                                data-toggle="modal"
-                                data-target="#card-3"
-                                class="btn btn-block btn-primary position-absolute">
-                            Дізнатись більш детально
-                        </button>
-                    </div>
-
-                    <div class="modal fade" id="card-3" tabindex="-1" role="dialog" aria-labelledby="card-3" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">
-                                        Тренінг з курсу «Податки в Україні»
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                        Старт 20 вересня 2020 року
-
-                                        Формат проведення: дистанційне з доступом до навчання 24/7
-
-                                        Обсяг курсу 64 години
-
-                                        Фокус на мультиформатне навчання яке поєднує відео уроки з теоретичним
-                                        матеріалом, домашнє завдання, перевірку якого здійснює особисто лектор, он-
-                                        лайн відео сесії з закріпленням теоретичного матеріалу та вирішенням
-                                        практичних задач. Контрольна робота по закінченню тренінгу є обов’язковою
-
-                                        для отримання сертифікату.
-                                        На вас чекає:
-                                        10 он-лайн відео сесій
-                                        Щонеділі з 13.09.2020 по 15.11.2020
-
-                                        тривалість 4 години
-                                        час 10.00 – 14.00
-
-                                        4 он-лайн відео сесії для відповіді на запитання по 1 годині
-
-                                        40 відео уроків по 30 хвилин
-                                        закритий чат з відповідями на запитання
-
-                                        контрольна робота
-
-                                        сертифікат про успішну участь у тренінгу з курсу
-                                    </p>
-
-                                    <div class="border-top mb-2"></div>
-
-                                    <form action="" style="max-width: 500px" class="m-auto">
-                                        <p class="lead">Зареєструватись</p>
-
-                                        <div class="form-group">
-                                            <label for="card-3-name" class="form-label">Ім’я</label>
-                                            <input type="text" id="card-3-name" name="card-3-name" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="card-3-email" class="form-label">Email</label>
-                                            <input type="email" id="card-3-email" name="card-3-email" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="card-3-phone" class="form-label">Телефон</label>
-                                            <input type="text" id="card-3-phone" name="card-3-phone" class="form-control">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">Зареєструватись</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
