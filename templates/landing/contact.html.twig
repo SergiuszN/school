@@ -1,0 +1,26 @@
+{% extends 'base.landing.html.twig' %}
+
+{% block body %}
+    <section class="pt-3 pb-3 pt-md-5 pb-md-5 bg-light">
+        <div class="container">
+            <h1 class="display-5 text-center">Зв'язатися з нами</h1>
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aspernatur distinctio molestiae numquam repudiandae sequi tempora. Amet aspernatur culpa error esse est nostrum optio, quasi qui quibusdam sunt totam veritatis?</p>
+            <form class="bg-white px-5 pt-5 pb-5 rounded shadow-sm">
+                <div class="form-group">
+                    <label for="contact-name">Ім’я</label>
+                    <input type="text" class="form-control" id="contact-name">
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email</label>
+                    <input type="email" class="form-control" id="contact-email">
+                </div>
+                <div class="form-group">
+                    <label for="contact-question">Питання</label>
+                    <textarea class="form-control" id="contact-question"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Надіслати</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}
+

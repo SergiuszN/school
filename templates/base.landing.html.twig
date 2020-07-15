@@ -20,7 +20,9 @@
     {% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
+{% include 'components/landing_header.html.twig' %}
 {% block body %}{% endblock %}
+{% include 'components/landing_footer.html.twig' %}
 {% block javascripts %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"></script>

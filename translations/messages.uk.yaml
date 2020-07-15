@@ -3,14 +3,6 @@ base:
         title: 'АСNN он-лайн школа професійного розвитку та особистої ефективності'
     admin:
         title: 'АСNN он-лайн школа професійного розвитку та особистої ефективності'
-component:
-    header:
-        brand: 'ACNN'
-        menu:
-            home: 'Головна'
-            events: 'Заходи'
-            news: 'Новини'
-            login: 'Вхід'
 landing:
     home:
         title: 'АСNN'
@@ -37,7 +29,7 @@ admin:
                 description: 'Опис'
                 submit: 'Створити'
         edit:
-            success: 'Нова подія успішно змінена'
+            success: 'Подія успішно змінена'
             form:
                 name: 'Назва'
                 date: 'Дата'
@@ -49,4 +41,46 @@ admin:
             success: 'Подія успішно видалена'
         list:
             confirm:
-                remove: 'Чи справді ви бажаєте видалити цю подію?'
+                remove: 'Чи ви справді бажаєте видалити цю подію?'
+    blog:
+        post:
+            remove:
+                success: 'Стаття успішно видалена'
+            edit:
+                success: 'Стаття успішно змінена'
+                form:
+                    name: 'Назва'
+                    image: 'Зображення'
+                    preview: "Прев'ю"
+                    content: 'Контент'
+                    submit: 'Змінити'
+            create:
+                success: 'Стаття успішно створена'
+                form:
+                    name: 'Назва'
+                    image: 'Зображення'
+                    preview: "Прев'ю"
+                    content: 'Контент'
+                    submit: 'Створити'
+            list:
+                confirm:
+                    remove: 'Чи ви справді бажаєте видалити цю статтю?'
+components:
+    admin:
+        sidebar:
+            brand: 'ACNN'
+            dashboard: 'Панель управління'
+            events: 'Події'
+            posts: 'Статті'
+        topbar:
+            logout: 'Вихід'
+    landing:
+        header:
+            brand: 'ACNN'
+            menu:
+                home: 'Головна'
+                events: 'Заходи'
+                news: 'Новини'
+                login: 'Вхід'
+                about: 'О нас'
+                contact: 'Запитання'

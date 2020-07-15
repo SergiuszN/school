@@ -1,8 +1,6 @@
 {% extends 'base.landing.html.twig' %}
 
 {% block body %}
-    {% include 'components/landing_header.html.twig' %}
-
     <section class="pt-3 pb-3 pt-md-5 pb-md-5">
         <div class="pt-md-5 pb-md-5 mx-auto text-center" style="max-width: 700px">
             <h1 class="display-4 font-weight-bold">{{ 'landing.home.title'|trans }}</h1>
@@ -43,69 +41,24 @@
     </section>
 
     <section class="pt-3 pb-3 pt-md-5 pb-md-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6 text-center">
-                    <img style="max-width: 330px" class="img-fluid" src="https://placeimg.com/500/500/tech" alt="">
-                </div>
-                <div class="col-12 col-md-6">
-                    <p class="lead font-weight-bold">Вам будуть корисні наші тренінги і курси, якщо ви бажаєте:</p>
-                    <ul>
-                        <li>бути висококваліфікованим спеціалістом</li>
-                        <li>мати власну професійну думку</li>
-                        <li>стати лідером у своїй справі</li>
-                        <li>успішно будувати кар’єру</li>
-                        <li>використовувати тайм-менеджмент для ефективного розподілу часу на роботу та особисте життя</li>
-                        <li>навчитися планувати та вийти з хаосу незакінчених справ</li>
-                    </ul>
-
-                    <p>
-                        <strong>Моя місія</strong> – підвищення цінності професії «бухгалтер», шляхом навчання
-                        спеціалістів з обліку до рівня професійного бухгалтера, який бачить за цифрами
-                        реальний світ економіки
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="pt-3 pb-3 pt-md-5 pb-md-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    <p class="lead font-weight-bold">Як проходять наші тренінги?</p>
-
-                    <p>В вашому особистому кабінеті ви переглядаєте відео уроки та отримуєте домашні завдання</p>
-                    <p>Щотижня проходять он-лайн відео сесії з лектором, які присвячуються розбору практичних завдань</p>
-                    <p>Закритий чат для спілкування учасників та відповідей на запитання</p>
-                    <p>По закінченню тренінгу обов’язкова контрольна робота</p>
-                    <p>Сертифікат чекає на кандидатів, які успішно виконали контрольну роботу</p>
-                </div>
-                <div class="col-12 col-md-6 text-center">
-                    <img style="max-width: 330px" class="img-fluid" src="https://placeimg.com/500/500/arch" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="pt-3 pb-3 pt-md-5 pb-md-5">
         <div class="container text-center">
-            <p class="lead display-3 mb-4">Найближчі події</p>
+            <h2 class="mb-4">Найближчі події</h2>
             <div class="card-deck">
                 {% for event in events %}
                     <div class="card position-relative pb-5">
-                        <div class="card-header d-flex align-items-center" style="height: 140px">
-                            <h4 class="my-0 font-weight-normal">{{ event.name }}</h4>
+                        <div class="card-header d-flex align-items-center" style="height: 100px">
+                            <p class="lead my-0 font-weight-normal">{{ event.name }}</p>
                         </div>
                         <div class="card-body">
-                            <p class="display-3 lead font-weight-bold">₴{{ event.price }}</p>
-                            <p>
-                                <span class="text-muted">{{ event.date|date('d-m-Y') }}</span>
+                            <div class="d-flex justify-content-between">
+                                <span class="lead text-muted">{{ event.date|date('d-m-Y') }}</span>
+                                <span class="lead font-weight-bold">₴{{ event.price }}</span>
+                            </div>
 
-                                <br><br>
+                            <br>
 
-                                {{ event.preview }}
-                            </p>
+                            {{ event.preview|raw }}
+
                             <button
                                     style="width: calc(100% - 40px); bottom: 20px"
                                     type="button"
@@ -163,26 +116,47 @@
 
     <section class="pt-3 pb-3 pt-md-5 pb-md-5 bg-light">
         <div class="container">
-            <div class="jumbotron">
-                <h1 class="display-4 text-center">Зв'язатися з нами</h1>
-                <form>
-                    <div class="form-group">
-                        <label for="contact-name">Ім’я</label>
-                        <input type="text" class="form-control" id="contact-name">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-email">Email</label>
-                        <input type="email" class="form-control" id="contact-email">
-                    </div>
-                    <div class="form-group">
-                        <label for="contact-question">Питання</label>
-                        <textarea class="form-control" id="contact-question"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Надіслати</button>
-                </form>
+            <div class="row">
+                <div class="col-12 col-md-6 text-center">
+                    <img style="max-width: 330px" class="img-fluid" src="https://placeimg.com/500/500/tech" alt="">
+                </div>
+                <div class="col-12 col-md-6">
+                    <p class="lead font-weight-bold">Вам будуть корисні наші тренінги і курси, якщо ви бажаєте:</p>
+                    <ul>
+                        <li>бути висококваліфікованим спеціалістом</li>
+                        <li>мати власну професійну думку</li>
+                        <li>стати лідером у своїй справі</li>
+                        <li>успішно будувати кар’єру</li>
+                        <li>використовувати тайм-менеджмент для ефективного розподілу часу на роботу та особисте життя</li>
+                        <li>навчитися планувати та вийти з хаосу незакінчених справ</li>
+                    </ul>
+
+                    <p>
+                        <strong>Моя місія</strong> – підвищення цінності професії «бухгалтер», шляхом навчання
+                        спеціалістів з обліку до рівня професійного бухгалтера, який бачить за цифрами
+                        реальний світ економіки
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    {% include 'components/landing_footer.html.twig' %}
+    <section class="pt-3 pb-3 pt-md-5 pb-md-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <p class="lead font-weight-bold">Як проходять наші тренінги?</p>
+
+                    <p>В вашому особистому кабінеті ви переглядаєте відео уроки та отримуєте домашні завдання</p>
+                    <p>Щотижня проходять он-лайн відео сесії з лектором, які присвячуються розбору практичних завдань</p>
+                    <p>Закритий чат для спілкування учасників та відповідей на запитання</p>
+                    <p>По закінченню тренінгу обов’язкова контрольна робота</p>
+                    <p>Сертифікат чекає на кандидатів, які успішно виконали контрольну роботу</p>
+                </div>
+                <div class="col-12 col-md-6 text-center">
+                    <img style="max-width: 330px" class="img-fluid" src="https://placeimg.com/500/500/arch" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}

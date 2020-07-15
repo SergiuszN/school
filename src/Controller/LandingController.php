@@ -17,4 +17,28 @@ class LandingController extends AbstractController
             'events' => $eventRepository->findUpcomings()
         ]);
     }
+
+    /**
+     * @Route("/contact", name="landing_contact")
+     */
+    public function contact()
+    {
+        return $this->render('landing/contact.html.twig');
+    }
+
+    /**
+     * @Route("/tac", name="landing_tac")
+     */
+    public function tac()
+    {
+        return $this->render('landing/tac.html.twig');
+    }
+
+    /**
+     * @Route("/about", name="landing_about")
+     */
+    public function about()
+    {
+        return $this->render('landing/about.html.twig');
+    }
 }
