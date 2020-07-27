@@ -1,0 +1,54 @@
+.card-limited-inner-text {
+    height: 250px;
+}
+
+.nano-content {
+    padding-right: 15px;
+}
+
+/* COLORS */
+
+h1 {
+    color: #F7B647;
+}
+
+.bg-primary {
+    background-color: #fad390 !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #F7B647;
+    border-color: #F7B647;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: #fad390;
+    border-color: #fad390;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #fad390;
+    border-color: #fad390;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    color: #fff;
+    background-color: #fad390;
+    border-color: #fad390;
+    box-shadow: 0 0 0 0.2rem #fad390;
+}
+
+.navbar.bg-primary {
+    color: #fff;
+}
+
+.bg-light {
+    background-color: #FDF0D9!important;
+}
+
+.card-header {
+    background-color: #FDF0D9!important;
+}

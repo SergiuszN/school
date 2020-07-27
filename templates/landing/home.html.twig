@@ -34,79 +34,37 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 d-none d-inline text-center">
-                    <img style="max-width: 300px" class="rounded-circle img-fluid img-thumbnail" src="https://placeimg.com/640/640/nature?t=1594665547688" alt="">
+                    <img style="max-width: 300px" class="rounded-circle img-fluid img-thumbnail" src="{{ asset('img/me.jpg') }}" alt="">
                 </div>
             </div>
         </div>
     </section>
 
     <section class="pt-3 pb-3 pt-md-5 pb-md-5">
-        <div class="container text-center">
+        <div id="events" class="container text-center">
             <h2 class="mb-4">Найближчі події</h2>
-            <div class="card-deck">
+            <div class="owl-carousel owl-theme">
                 {% for event in events %}
-                    <div class="card position-relative pb-5">
+                    <div class="card" style="width: 100%">
                         <div class="card-header d-flex align-items-center" style="height: 100px">
                             <p class="lead my-0 font-weight-normal">{{ event.name }}</p>
                         </div>
                         <div class="card-body">
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mb-3">
                                 <span class="lead text-muted">{{ event.date|date('d-m-Y') }}</span>
                                 <span class="lead font-weight-bold">₴{{ event.price }}</span>
                             </div>
 
-                            <br>
-
-                            {{ event.preview|raw }}
-
-                            <button
-                                    style="width: calc(100% - 40px); bottom: 20px"
-                                    type="button"
-                                    data-toggle="modal"
-                                    data-target="#card-{{ event.id }}"
-                                    class="btn btn-block btn-primary position-absolute">
-                                Дізнатись більш детально
-                            </button>
-                        </div>
-
-                        <div class="modal fade" id="card-{{ event.id }}" tabindex="-1" role="dialog" aria-labelledby="card-1" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">
-                                            {{ event.name }}
-                                        </h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        {{ event.description|raw }}
-
-                                        <div class="border-top mb-2"></div>
-
-                                        <form action="" style="max-width: 500px" class="m-auto">
-                                            <p class="lead">Зареєструватись</p>
-
-                                            <div class="form-group">
-                                                <label for="card-{{ event.id }}-name" class="form-label">Ім’я</label>
-                                                <input type="text" id="card-{{ event.id }}-name" name="card-name" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="card-{{ event.id }}-email" class="form-label">Email</label>
-                                                <input type="email" id="card-{{ event.id }}-email" name="card-email" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="card-{{ event.id }}-phone" class="form-label">Телефон</label>
-                                                <input type="text" id="card-{{ event.id }}-phone" name="card-phone" class="form-control">
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-primary btn-block">Зареєструватись</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                            <div class="card-limited-inner-text mb-3 nano">
+                                <div class="nano-content">{{ event.preview|raw }}</div>
                             </div>
+
+                            <a
+                                    href="{{ path('landing_register', {'event': event.id}) }}"
+                                    type="button"
+                                    class="btn btn-block btn-primary">
+                                Дізнатись більш детально
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
@@ -114,13 +72,13 @@
         </div>
     </section>
 
-    <section class="pt-3 pb-3 pt-md-5 pb-md-5 bg-light">
+    <section class="pt-3 pb-3 pt-md-5 bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-6 text-center">
-                    <img style="max-width: 330px" class="img-fluid" src="https://placeimg.com/500/500/tech" alt="">
+                <div class="col-12 col-md-6 text-center mb-4">
+                    <img class="img-fluid" src="{{ asset('img/1.jpg') }}" alt="">
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 mb-4">
                     <p class="lead font-weight-bold">Вам будуть корисні наші тренінги і курси, якщо ви бажаєте:</p>
                     <ul>
                         <li>бути висококваліфікованим спеціалістом</li>
@@ -141,10 +99,10 @@
         </div>
     </section>
 
-    <section class="pt-3 pb-3 pt-md-5 pb-md-5">
+    <section class="pt-3 pb-3 pt-md-5">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 mb-4">
                     <p class="lead font-weight-bold">Як проходять наші тренінги?</p>
 
                     <p>В вашому особистому кабінеті ви переглядаєте відео уроки та отримуєте домашні завдання</p>
@@ -153,8 +111,8 @@
                     <p>По закінченню тренінгу обов’язкова контрольна робота</p>
                     <p>Сертифікат чекає на кандидатів, які успішно виконали контрольну роботу</p>
                 </div>
-                <div class="col-12 col-md-6 text-center">
-                    <img style="max-width: 330px" class="img-fluid" src="https://placeimg.com/500/500/arch" alt="">
+                <div class="col-12 col-md-6 text-center mb-4">
+                    <img class="img-fluid" src="{{ asset('img/2.jpg') }}" alt="">
                 </div>
             </div>
         </div>

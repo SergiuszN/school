@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>{% block title %}{{ 'base.landing.title'|trans }}{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('css/landing.css') }}">
+    {% endblock %}
+</head>
+<body>
+    <div class="container text-center mt-5 pt-5">
+        <h1 class="display-1 mb-5">{{ 'error.404.title'|trans }}</h1>
+        <div class="lead mb-5">{{ 'error.404.lead'|trans }}</div>
+        <a href="{{ path('landing_home') }}" class="btn btn-primary btn-lg rounded-pill">{{ 'error.404.button'|trans }}</a>
+    </div>
+</body>
+</html>

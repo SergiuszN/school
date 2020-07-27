@@ -8,6 +8,20 @@ landing:
         title: 'АСNN'
         lead: 'он-лайн школа професійного розвитку та особистої ефективності для бухгалтерів, фінансистів та підприємців'
         meta: 'МОЯ МЕТА – ЦЕ ВАШ РЕЗУЛЬТАТ'
+    eventRegistration:
+        create:
+            form:
+                name: 'Ім’я'
+                email: 'Email'
+                phone: 'Телефон'
+                submit: 'Зареєструватись'
+    register:
+        lead: 'Зареєструватись'
+        back: 'Назад'
+    thank_you:
+        h1: 'Дякуємо за реєстрацію'
+        lead: "Ми зв'яжемося з вами найближчим часом"
+        back: 'На головну'
 security:
     login:
         form:
@@ -80,7 +94,13 @@ components:
             menu:
                 home: 'Головна'
                 events: 'Заходи'
-                news: 'Новини'
+                blog: 'Блог'
                 login: 'Вхід'
                 about: 'О нас'
                 contact: 'Запитання'
+                tac: 'TaC'
+error:
+    404:
+        title: '404'
+        lead: 'На жаль, такої сторінки не існує'
+        button: 'Забери мене звідси'

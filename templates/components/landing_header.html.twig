@@ -1,31 +1,30 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary border-bottom shadow-sm">
     <div class="container">
-        <a class="navbar-brand" href="#">{{ 'components.landing.header.brand'|trans }}</a>
+        <a class="navbar-brand" href="{{ path('landing_home') }}">{{ 'components.landing.header.brand'|trans }}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item {% if app.request.get('_route') == 'landing_home' %}active{% endif %}">
                     <a class="nav-link" href="{{ path('landing_home') }}">{{ 'components.landing.header.menu.home'|trans }}</a>
                 </li>
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="#">{{ 'components.landing.header.menu.events'|trans }}</a>#}
-{#                </li>#}
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" href="#">{{ 'components.landing.header.menu.news'|trans }}</a>#}
-{#                </li>#}
-                <li class="nav-item {% if app.request.get('_route') == 'landing_about' %}active{% endif %}">
-                    <a class="nav-link" href="{{ path('landing_about') }}">{{ 'components.landing.header.menu.about'|trans }}</a>
+                <li class="nav-item {% if app.request.get('_route') starts with 'landing_blog' %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('landing_blog') }}">{{ 'components.landing.header.menu.blog'|trans }}</a>
                 </li>
                 <li class="nav-item {% if app.request.get('_route') == 'landing_contact' %}active{% endif %}">
                     <a class="nav-link" href="{{ path('landing_contact') }}">{{ 'components.landing.header.menu.contact'|trans }}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="position: relative" href="{{ path('security_login') }}">
-                        {{ 'components.landing.header.menu.login'|trans }}</a>
+                <li class="nav-item {% if app.request.get('_route') == 'landing_tac' %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('landing_tac') }}">{{ 'components.landing.header.menu.tac'|trans }}</a>
                 </li>
+                <li class="nav-item {% if app.request.get('_route') == 'landing_about' %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('landing_about') }}">{{ 'components.landing.header.menu.about'|trans }}</a>
+                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" style="position: relative" href="{{ path('security_login') }}">#}
+{#                        {{ 'components.landing.header.menu.login'|trans }}</a>#}
+{#                </li>#}
             </ul>
         </div>
     </div>

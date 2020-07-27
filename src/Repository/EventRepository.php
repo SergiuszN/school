@@ -27,9 +27,10 @@ class EventRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.date > :from')
+            ->andWhere('e.date < :to')
             ->orderBy('e.date', 'ASC')
             ->setParameter('from', (new DateTime())->format('Y-m-d'))
-            ->setMaxResults(3)
+            ->setParameter('to', (new DateTime())->modify(Event::AVAILABLE_FOR_REGISTRATION)->format('Y-m-d'))
             ->getQuery()
             ->execute();
     }

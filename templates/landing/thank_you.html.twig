@@ -1,0 +1,12 @@
+{% extends 'base.landing.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5 mb-5">
+        <h1 class="display-4">
+            {{ 'landing.thank_you.h1'|trans }}
+        </h1>
+        <p class="lead">{{ 'landing.thank_you.lead'|trans }}</p>
+        <a href="{{ path('landing_home') }}" class="btn btn-primary btn-lg">{{ 'landing.thank_you.back'|trans }}</a>
+    </div>
+{% endblock %}
+
