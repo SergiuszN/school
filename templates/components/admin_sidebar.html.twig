@@ -29,6 +29,13 @@
         </a>
     </div>
 
+    <div class="nav-item {% if app.request.get('_route') starts with 'admin_blog_categor' %}active{% endif %}">
+        <a class="nav-link" href="{{ path('admin_blog_category_list') }}">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>{{ 'components.admin.sidebar.categories'|trans }}</span>
+        </a>
+    </div>
+
     <hr class="sidebar-divider d-none d-md-block">
 
     <div class="text-center d-none d-md-inline">

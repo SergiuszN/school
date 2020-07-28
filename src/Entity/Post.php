@@ -11,6 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
+    const MAX_PER_PAGE_LANDING = 10;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -47,6 +49,11 @@ class Post
      * @ORM\ManyToOne(targetEntity=PostCategory::class, inversedBy="posts")
      */
     private $category;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isActive;
 
     public function getId(): ?int
     {
@@ -121,6 +128,18 @@ class Post
     public function setCategory(?PostCategory $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getIsActive(): ?bool
+    {
+        return $this->isActive;
+    }
+
+    public function setIsActive(bool $isActive): self
+    {
+        $this->isActive = $isActive;
 
         return $this;
     }

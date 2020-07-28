@@ -68,6 +68,7 @@ admin:
                     preview: "Прев'ю"
                     content: 'Контент'
                     submit: 'Змінити'
+                    category: 'Категорія'
             create:
                 success: 'Стаття успішно створена'
                 form:
@@ -76,9 +77,45 @@ admin:
                     preview: "Прев'ю"
                     content: 'Контент'
                     submit: 'Створити'
+                    isActive: 'Видимий'
+                    category: 'Категорія'
             list:
                 confirm:
                     remove: 'Чи ви справді бажаєте видалити цю статтю?'
+                header: 'Статті'
+                create: 'Створити'
+                name: 'Назва'
+                category: 'Категорія'
+                created: 'Створено'
+                isVisible: 'Видимий'
+                actions: 'Акції'
+        category:
+            remove:
+                success: 'Категорія успішно видалена'
+                errorCategoryHavePosts: 'Не можна видалити цю категорію так як вона містить статті'
+            edit:
+                success: 'Категорія успішно змінена'
+                form:
+                    name: 'Назва'
+                    isActive: 'Видимa'
+                    submit: 'Змінити'
+                header: 'Змінити категорію'
+            create:
+                success: 'Категорія успішно створена'
+                form:
+                    name: 'Назва'
+                    isActive: 'Видимa'
+                    submit: 'Створити'
+                header: 'Створити нову категорію'
+            list:
+                th:
+                    name: 'Назва'
+                    isVisible: 'Видимa'
+                    actions: 'Акції'
+                header: 'Категоріі'
+                create: 'Створити'
+                confirm:
+                    remove: 'Чи ви справді бажаєте видалити цю категорію?'
 components:
     admin:
         sidebar:
@@ -86,6 +123,7 @@ components:
             dashboard: 'Панель управління'
             events: 'Події'
             posts: 'Статті'
+            categories: 'Категорії'
         topbar:
             logout: 'Вихід'
     landing:
@@ -98,7 +136,8 @@ components:
                 login: 'Вхід'
                 about: 'О нас'
                 contact: 'Запитання'
-                tac: 'TaC'
+                tac: 'ПРАВИЛА КОРИСТУВАННЯ САЙТОМ'
+                pp: 'ПОЛІТИКА КОНФЕДЕНЦІЙНОСТІ'
 error:
     404:
         title: '404'

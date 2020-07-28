@@ -15,9 +15,6 @@
                 <li class="nav-item {% if app.request.get('_route') == 'landing_contact' %}active{% endif %}">
                     <a class="nav-link" href="{{ path('landing_contact') }}">{{ 'components.landing.header.menu.contact'|trans }}</a>
                 </li>
-                <li class="nav-item {% if app.request.get('_route') == 'landing_tac' %}active{% endif %}">
-                    <a class="nav-link" href="{{ path('landing_tac') }}">{{ 'components.landing.header.menu.tac'|trans }}</a>
-                </li>
                 <li class="nav-item {% if app.request.get('_route') == 'landing_about' %}active{% endif %}">
                     <a class="nav-link" href="{{ path('landing_about') }}">{{ 'components.landing.header.menu.about'|trans }}</a>
                 </li>

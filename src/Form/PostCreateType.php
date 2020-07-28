@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Post;
+use App\Entity\PostCategory;
 use App\Util\FakeTranslator;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,9 +29,17 @@ class PostCreateType extends AbstractType
                 'label' => $trans->trans('admin.blog.post.create.form.name'),
                 'required' => true,
             ])
+            ->add('category', EntityType::class, [
+                'class' => PostCategory::class,
+                'label' => $trans->trans('admin.blog.post.create.form.category'),
+                'required' => true,
+            ])
             ->add('image', TextType::class, [
                 'label' => $trans->trans('admin.blog.post.create.form.image'),
                 'required' => true,
+            ])
+            ->add('isActive', CheckboxType::class, [
+                'label' => $trans->trans('admin.blog.post.create.form.isActive'),
             ])
             ->add('preview', CKEditorType::class, [
                 'label' => $trans->trans('admin.blog.post.create.form.preview'),

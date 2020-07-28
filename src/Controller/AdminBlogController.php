@@ -3,8 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\PostCategory;
+use App\Form\PostCategoryCreateType;
+use App\Form\PostCategoryEditType;
 use App\Form\PostCreateType;
 use App\Form\PostEditType;
+use App\Repository\PostCategoryRepository;
 use App\Repository\PostRepository;
 use App\Util\FakeTranslator;
 use DateTime;
@@ -26,6 +30,16 @@ class AdminBlogController extends AbstractController
         return $this->render('admin/blog/post/list.html.twig', [
             'posts' => $postRepository->findAll()
         ]);
+    }
+
+    /**
+     * @Route("/post/toggle/{post}", name="admin_blog_post_toggle")
+     */
+    public function postToggle(Post $post, EntityManagerInterface $em)
+    {
+        $post->setIsActive(!$post->getIsActive());
+        $em->flush();
+        return $this->redirectToRoute('admin_blog_post_list');
     }
 
     /**
@@ -53,7 +67,7 @@ class AdminBlogController extends AbstractController
     /**
      * @Route("/post/edit/{post}", name="admin_blog_post_edit")
      */
-    public function edit(Post $post, Request $request, EntityManagerInterface $em)
+    public function postEdit(Post $post, Request $request, EntityManagerInterface $em)
     {
         $form = $this->createForm(PostEditType::class, $post)
             ->handleRequest($request);
@@ -72,11 +86,86 @@ class AdminBlogController extends AbstractController
     /**
      * @Route("/post/remove/{post}", name="admin_blog_post_remove")
      */
-    public function remove(Post $post, EntityManagerInterface $em)
+    public function postRemove(Post $post, EntityManagerInterface $em)
     {
         $em->remove($post);
         $em->flush();
         $this->addFlash('success', (new FakeTranslator())->trans('admin.blog.post.remove.success'));
         return $this->redirectToRoute('admin_blog_post_list');
+    }
+
+    /**
+     * @Route("/categories", name="admin_blog_category_list")
+     */
+    public function categoryList(PostCategoryRepository $postCategoryRepository)
+    {
+        return $this->render('admin/blog/category/list.html.twig', [
+            'categories' => $postCategoryRepository->findAll()
+        ]);
+    }
+
+    /**
+     * @Route("/category/toggle/{category}", name="admin_blog_category_toggle")
+     */
+    public function categoryToggle(PostCategory $category, EntityManagerInterface $em)
+    {
+        $category->setIsActive(!$category->getIsActive());
+        $em->flush();
+        return $this->redirectToRoute('admin_blog_category_list');
+    }
+
+    /**
+     * @Route("/category/create", name="admin_blog_category_create")
+     */
+    public function categoryCreate(Request $request, EntityManagerInterface $em)
+    {
+        $form = $this->createForm(PostCategoryCreateType::class, new PostCategory())
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($form->getData());
+            $em->flush();
+            $this->addFlash('success', (new FakeTranslator())->trans('admin.blog.category.create.success'));
+            return $this->redirectToRoute('admin_blog_category_list');
+        }
+
+        return $this->render('admin/blog/category/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/category/edit/{category}", name="admin_blog_category_edit")
+     */
+    public function categoryEdit(PostCategory $category, Request $request, EntityManagerInterface $em)
+    {
+        $form = $this->createForm(PostCategoryEditType::class, $category)
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+            $this->addFlash('success', (new FakeTranslator())->trans('admin.blog.category.edit.success'));
+            return $this->redirectToRoute('admin_blog_category_list');
+        }
+
+        return $this->render('admin/blog/category/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/category/remove/{category}", name="admin_blog_category_remove")
+     */
+    public function categoryRemove(PostCategory $category, EntityManagerInterface $em)
+    {
+        if ($category->getPosts()->count() > 0) {
+            $this->addFlash('danger', (new FakeTranslator())->trans('admin.blog.category.remove.errorCategoryHavePosts'));
+            return $this->redirectToRoute('admin_blog_category_list');
+        }
+
+        $em->remove($category);
+        $em->flush();
+        $this->addFlash('success', (new FakeTranslator())->trans('admin.blog.category.remove.success'));
+        return $this->redirectToRoute('admin_blog_category_list');
     }
 }

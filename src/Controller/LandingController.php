@@ -8,9 +8,12 @@ use App\Entity\Post;
 use App\Entity\PostCategory;
 use App\Form\EventRegistrationCreateType;
 use App\Repository\EventRepository;
+use App\Repository\PostCategoryRepository;
+use App\Repository\PostRepository;
 use App\Security\Voters\EventVoter;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -92,6 +95,14 @@ class LandingController extends AbstractController
     }
 
     /**
+     * @Route("/pp", name="landing_pp")
+     */
+    public function pp()
+    {
+        return $this->render('landing/pp.html.twig');
+    }
+
+    /**
      * @Route("/about", name="landing_about")
      */
     public function about()
@@ -102,17 +113,29 @@ class LandingController extends AbstractController
     /**
      * @Route("/blog/{page}", name="landing_blog", defaults={"page" = 1}, requirements={"page" = "\d+"})
      */
-    public function blog($page)
+    public function blog($page, PaginatorInterface $paginator, PostRepository $postRepository, PostCategoryRepository $postCategoryRepository)
     {
-        return $this->render('landing/blog.html.twig');
+        return $this->render('landing/blog.html.twig', [
+            'categories' => $postCategoryRepository->findAllActive(),
+            'latest' => $postRepository->findLatest(),
+            'page' => $paginator->paginate($postRepository->findLandingKnp(), $page, Post::MAX_PER_PAGE_LANDING),
+        ]);
     }
 
     /**
-     * @Route("/blog/{category}/{page}", name="landing_blog_category", defaults={"page" = 1}, requirements={"category" = "\d+", "page" = "\d+"})
+     * @Route("/blog/category/{category}/{page}", name="landing_blog_category", defaults={"page" = 1}, requirements={"category" = "\d+", "page" = "\d+"})
      */
-    public function blogCategory(PostCategory $category, $page)
+    public function blogCategory(PostCategory $category, $page, PaginatorInterface $paginator, PostRepository $postRepository, PostCategoryRepository $postCategoryRepository)
     {
-        return $this->render('landing/blog.html.twig');
+        if (!$category->getIsActive()) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('landing/blog.html.twig', [
+            'categories' => $postCategoryRepository->findAllActive(),
+            'latest' => $postRepository->findLatest(),
+            'page' => $paginator->paginate($postRepository->findLandingKnpWithCategory($category), $page, Post::MAX_PER_PAGE_LANDING),
+        ]);
     }
 
     /**
@@ -120,6 +143,12 @@ class LandingController extends AbstractController
      */
     public function blogPost(Post $post)
     {
-        return $this->render('landing/post.html.twig');
+        if (!$post->getIsActive()) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('landing/post.html.twig', [
+            'post' => $post
+        ]);
     }
 }

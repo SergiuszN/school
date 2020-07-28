@@ -39,6 +39,11 @@ class PostCategory
         $this->posts = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return (string) $this->name;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

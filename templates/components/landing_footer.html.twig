@@ -1,21 +1,26 @@
 <footer class="container mt-4">
+    <div class="border-top d-block d-md-none d-lg-none mb-3"></div>
     <div class="row">
-        <div class="col-4 font-weight-bold">
-            <div class="border-top pt-3">{{ 'components.landing.header.brand'|trans }}</div>
-            <br>
+        <div class="col-12 col-md-4 mb-3">
+            <div class="border-top d-none d-md-block d-lg-block pt-3"></div>
+            <strong> {{ 'components.landing.header.brand'|trans }}</strong>
+            - © Наталія Ніколенко, {{ 'now'|date('Y') }}
         </div>
-        <div class="col-4">
-            <dl class="border-top pt-3 text-right">
-                <dd><a class="text-secondary" href="#">{{ 'components.landing.header.menu.home'|trans }}</a></dd>
-                <dd><a class="text-secondary" href="#">{{ 'components.landing.header.menu.events'|trans }}</a></dd>
-                <dd><a class="text-secondary" href="#">{{ 'components.landing.header.menu.news'|trans }}</a></dd>
-                <dd><a class="text-secondary" href="#">{{ 'components.landing.header.menu.login'|trans }}</a></dd>
+        <div class="col-12 col-md-4 mb-3">
+            <div class="border-top d-none d-md-block d-lg-block pt-3"></div>
+            <dl class="">
+                <dd><a class="text-secondary" href="{{ path('landing_home') }}">{{ 'components.landing.header.menu.home'|trans }}</a></dd>
+                <dd><a class="text-secondary" href="{{ path('landing_blog') }}">{{ 'components.landing.header.menu.blog'|trans }}</a></dd>
+                <dd><a class="text-secondary" href="{{ path('landing_contact') }}">{{ 'components.landing.header.menu.contact'|trans }}</a></dd>
+                <dd><a class="text-secondary" href="{{ path('landing_about') }}">{{ 'components.landing.header.menu.about'|trans }}</a></dd>
             </dl>
         </div>
-        <div class="col-4">
-            <div class="border-top pt-3 text-secondary text-right">
-                © Наталія Ніколенко, {{ 'now'|date('Y') }}
-            </div>
+        <div class="col-12 col-md-4 mb-3">
+            <div class="border-top d-none d-md-block d-lg-block pt-3"></div>
+            <dl class="">
+                <dd><a class="text-secondary" href="{{ path('landing_pp') }}">{{ 'components.landing.header.menu.pp'|trans }}</a></dd>
+                <dd><a class="text-secondary" href="{{ path('landing_tac') }}">{{ 'components.landing.header.menu.tac'|trans }}</a></dd>
+            </dl>
         </div>
     </div>
 </footer>
