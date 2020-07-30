@@ -35,6 +35,11 @@ class EventRegistration
     private $name;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $accepted;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $email;
@@ -80,6 +85,18 @@ class EventRegistration
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getAccepted(): ?bool
+    {
+        return $this->accepted;
+    }
+
+    public function setAccepted(bool $accepted): self
+    {
+        $this->accepted = $accepted;
 
         return $this;
     }

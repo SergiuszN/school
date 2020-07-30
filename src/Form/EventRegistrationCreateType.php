@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\EventRegistration;
 use App\Util\FakeTranslator;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -33,8 +34,15 @@ class EventRegistrationCreateType extends AbstractType
                 'label' => $trans->trans('landing.eventRegistration.create.form.phone'),
                 'required' => true,
             ])
+            ->add('accepted', CheckboxType::class, [
+                'label' => $trans->trans('landing.eventRegistration.create.form.accepted'),
+                'required' => true,
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => $trans->trans('landing.eventRegistration.create.form.submit'),
+                'attr' => [
+                    'class' => 'btn btn-primary btn-block'
+                ]
             ]);
     }
 

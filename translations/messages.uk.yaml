@@ -11,10 +11,11 @@ landing:
     eventRegistration:
         create:
             form:
-                name: 'Ім’я'
+                name: 'ПІБ'
                 email: 'Email'
                 phone: 'Телефон'
                 submit: 'Зареєструватись'
+                accepted: 'Я ознайомлений і згоден з умовами Політики конфіденційності'
     register:
         lead: 'Зареєструватись'
         back: 'Назад'
@@ -22,6 +23,14 @@ landing:
         h1: 'Дякуємо за реєстрацію'
         lead: "Ми зв'яжемося з вами найближчим часом"
         back: 'На головну'
+    blog:
+        author: 'Наталія Ніколенко'
+        latest: 'messages'
+        categories: 'Категорії'
+        readMore: 'Читати далі'
+        categoriesAll: 'Всі'
+    contact:
+        title: "Зв'язатися з нами"
 security:
     login:
         form:
@@ -69,6 +78,7 @@ admin:
                     content: 'Контент'
                     submit: 'Змінити'
                     category: 'Категорія'
+                header: 'Змінити статтю'
             create:
                 success: 'Стаття успішно створена'
                 form:
@@ -79,6 +89,7 @@ admin:
                     submit: 'Створити'
                     isActive: 'Видимий'
                     category: 'Категорія'
+                header: 'Створити нову статтю'
             list:
                 confirm:
                     remove: 'Чи ви справді бажаєте видалити цю статтю?'
@@ -116,6 +127,19 @@ admin:
                 create: 'Створити'
                 confirm:
                     remove: 'Чи ви справді бажаєте видалити цю категорію?'
+        event:
+            create:
+                header: 'Створити нову подію'
+            edit:
+                header: 'Змінити подію'
+            list:
+                header: 'Події'
+                create: 'Створити'
+                table:
+                    name: 'Назва'
+                    date: 'Дата'
+                    price: 'Ціна'
+                    actions: 'Акції'
 components:
     admin:
         sidebar:
@@ -136,8 +160,9 @@ components:
                 login: 'Вхід'
                 about: 'О нас'
                 contact: 'Запитання'
-                tac: 'ПРАВИЛА КОРИСТУВАННЯ САЙТОМ'
-                pp: 'ПОЛІТИКА КОНФЕДЕНЦІЙНОСТІ'
+                tac: 'Правила Користування Сайтом'
+                pp: 'Політика Конфеденційності'
+            copy: '- © Наталія Ніколенко,'
 error:
     404:
         title: '404'

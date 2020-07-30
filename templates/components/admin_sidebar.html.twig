@@ -8,13 +8,6 @@
 
     <hr class="sidebar-divider my-0">
 
-    <div class="nav-item {% if app.request.get('_route') == 'admin_index' %}active{% endif %}">
-        <a class="nav-link" href="{{ path('admin_home') }}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>{{ 'components.admin.sidebar.dashboard'|trans }}</span>
-        </a>
-    </div>
-
     <div class="nav-item {% if app.request.get('_route') starts with 'admin_event_' %}active{% endif %}">
         <a class="nav-link" href="{{ path('admin_event_list') }}">
             <i class="fas fa-fw fa-chalkboard-teacher"></i>

@@ -8,22 +8,17 @@
                 {{ event.description|raw }}
             </div>
             <div class="col-12 col-md-4">
-                {{ form_start(form, {'attr': {'class': 'p-3 bg-light rounded'}}) }}
-                    <div class="d-flex justify-content-between mb-5">
+                <div class="p-3 bg-light rounded">
+                    <div class="d-flex justify-content-between mb-4">
                         <span class="lead">{{ 'landing.register.lead'|trans }}</span>
                         <a class="btn btn-secondary btn-sm" href="{{ path('landing_home') }}#events">
                             {{ 'landing.register.back'|trans }}
                         </a>
                     </div>
+                    {{ form(form) }}
 
-                    {{ form_row(form.name) }}
-                    {{ form_row(form.email) }}
-                    {{ form_row(form.phone) }}
-
-                    <div class="form-group mt-4">
-                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary btn-block'}}) }}
-                    </div>
-                {{ form_end(form) }}
+                    <a href="{{ path('landing_pp') }}">{{ 'components.landing.header.menu.pp'|trans }}</a>
+                </div>
             </div>
         </div>
     </div>

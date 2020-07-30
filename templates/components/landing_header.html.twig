@@ -1,9 +1,28 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-primary border-bottom shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ path('landing_home') }}">{{ 'components.landing.header.brand'|trans }}</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div>
+            <div class="d-inline-flex d-lg-none align-content-end">
+                <a class="text-dark text-decoration-none d-inline-flex mr-2 mr-sm-3" href="mailto:acnn@ukr.net">
+                    <i class="fa fa-envelope"></i>
+                </a>
+                <a class="text-dark text-decoration-none d-inline-flex mr-2 mr-sm-3" href="tel:+380675624328">
+                    <i class="fa fa-tablet-alt"></i>
+                </a>
+                <a class="text-dark text-decoration-none d-inline-flex mr-2 mr-sm-3" target="_blank" href="https://www.facebook.com/acnnschool">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a class="text-dark text-decoration-none d-inline-flex mr-2 mr-sm-3" target="_blank" href="http://instagram.com/acnn_school">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a class="text-dark text-decoration-none d-inline-flex mr-2 mr-sm-3" target="_blank" href="http://t.me/acnn_school">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
         <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item {% if app.request.get('_route') == 'landing_home' %}active{% endif %}">
@@ -18,10 +37,23 @@
                 <li class="nav-item {% if app.request.get('_route') == 'landing_about' %}active{% endif %}">
                     <a class="nav-link" href="{{ path('landing_about') }}">{{ 'components.landing.header.menu.about'|trans }}</a>
                 </li>
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link" style="position: relative" href="{{ path('security_login') }}">#}
-{#                        {{ 'components.landing.header.menu.login'|trans }}</a>#}
-{#                </li>#}
+                <li class="nav-item d-none d-lg-flex align-items-center ml-2">
+                    <a class="nav-link d-inline-flex" href="mailto:acnn@ukr.net">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <a class="nav-link d-inline-flex" href="tel:+380675624328">
+                        <i class="fa fa-tablet-alt"></i>
+                    </a>
+                    <a class="nav-link d-inline-flex" target="_blank" href="https://www.facebook.com/acnnschool">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a class="nav-link d-inline-flex" target="_blank" href="http://instagram.com/acnn_school">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="nav-link d-inline-flex" target="_blank" href="http://t.me/acnn_school">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

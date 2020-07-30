@@ -15,6 +15,6 @@ class AdminController extends AbstractController
      */
     public function home()
     {
-        return $this->render('admin/home.html.twig');
+        return $this->redirectToRoute('admin_event_list');
     }
 }
