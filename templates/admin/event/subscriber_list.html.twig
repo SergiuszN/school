@@ -1,0 +1,40 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block body %}
+    {% include 'components/admin_alerts.html.twig' %}
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex justify-content-between align-items-center">
+            <h4 class="m-0 font-weight-bold text-primary">{{ 'admin.blog.eventSubscriber.list.header'|trans }}</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="table" style="width: 100%">
+                    <thead>
+                    <tr>
+                        <th>{{ 'admin.blog.eventSubscriber.list.table.name'|trans }}</th>
+                        <th>{{ 'admin.blog.eventSubscriber.list.table.email'|trans }}</th>
+                        <th>{{ 'admin.blog.eventSubscriber.list.table.phone'|trans }}</th>
+                        <th>{{ 'admin.blog.eventSubscriber.list.table.created'|trans }}</th>
+                        <th>{{ 'admin.blog.eventSubscriber.list.table.status'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for subscriber in subscribers %}
+                        <tr>
+                            <td>{{ subscriber.name }}</td>
+                            <td>{{ subscriber.email }}</td>
+                            <td>{{ subscriber.phone }}</td>
+                            <td>{{ subscriber.created|date('Y-m-d H:i:s') }}</td>
+                            <td>{{ subscriber.status }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <a href="{{ path('admin_event_list') }}" class="btn btn-success">{{ 'admin.blog.eventSubscriber.list.back'|trans }}</a>
+        </div>
+    </div>
+{% endblock %}

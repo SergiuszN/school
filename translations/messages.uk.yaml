@@ -25,7 +25,7 @@ landing:
         back: 'На головну'
     blog:
         author: 'Наталія Ніколенко'
-        latest: 'messages'
+        latest: 'Останні статті'
         categories: 'Категорії'
         readMore: 'Читати далі'
         categoriesAll: 'Всі'
@@ -140,6 +140,17 @@ admin:
                     date: 'Дата'
                     price: 'Ціна'
                     actions: 'Акції'
+                    subscribers: 'Записалися'
+        eventSubscriber:
+            list:
+                header: 'Записалися'
+                table:
+                    name: 'ПІБ'
+                    email: 'Email'
+                    phone: 'Телефон'
+                    created: 'Дата'
+                    status: 'Статус'
+                back: 'Назад'
 components:
     admin:
         sidebar:

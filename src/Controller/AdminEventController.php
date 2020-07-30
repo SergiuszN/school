@@ -76,4 +76,14 @@ class AdminEventController extends AbstractController
         $this->addFlash('success', (new FakeTranslator())->trans('admin.event.remove.success'));
         return $this->redirectToRoute('admin_event_list');
     }
+
+    /**
+     * @Route("/subscribers/{event}", name="admin_event_subscribers")
+     */
+    public function subscribers(Event $event)
+    {
+        return $this->render('admin/event/subscriber_list.html.twig', [
+            'subscribers' => $event->getRegistrations()
+        ]);
+    }
 }
