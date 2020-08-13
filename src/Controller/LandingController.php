@@ -2,15 +2,19 @@
 
 namespace App\Controller;
 
+use App\DTO\ContactDTO;
 use App\Entity\Event;
 use App\Entity\EventRegistration;
 use App\Entity\Post;
 use App\Entity\PostCategory;
+use App\Form\ContactType;
 use App\Form\EventRegistrationCreateType;
 use App\Repository\EventRepository;
 use App\Repository\PostCategoryRepository;
 use App\Repository\PostRepository;
 use App\Security\Voters\EventVoter;
+use App\Service\AppMailer;
+use App\Util\FakeTranslator;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -33,7 +37,7 @@ class LandingController extends AbstractController
     /**
      * @Route("/event-register/{event}", name="landing_register")
      */
-    public function register(Event $event, EntityManagerInterface $em, Request $request)
+    public function register(Event $event, EntityManagerInterface $em, Request $request, AppMailer $mailer)
     {
         if (!$this->isGranted(EventVoter::REGISTER, $event)) {
             throw $this->createNotFoundException();
@@ -53,9 +57,11 @@ class LandingController extends AbstractController
 
                 $em->persist($registration);
                 $em->flush();
+
+                $mailer->sendEventConfirmRegistration($registration);
             }
 
-            return $this->redirectToRoute('landing_thank_you', ['event' => $event->getId()]);
+            return $this->redirectToRoute('landing_thank_you');
         }
 
         return $this->render('landing/register.html.twig', [
@@ -65,25 +71,50 @@ class LandingController extends AbstractController
     }
 
     /**
-     * @Route("/thank-you/{event}", name="landing_thank_you")
+     * @Route("/thank-you", name="landing_thank_you")
      */
-    public function thankYou(Event $event)
+    public function thankYou()
     {
-        if (!$this->isGranted(EventVoter::REGISTER, $event)) {
-            throw $this->createNotFoundException();
+        return $this->render('landing/thank_you.html.twig');
+    }
+
+    /**
+     * @Route("/confirm-registration/{eventRegistration}-{token}", name="landing_confirm_registration")
+     */
+    public function confirmRegistration(EventRegistration $eventRegistration, $token, EntityManagerInterface $em, AppMailer $mailer)
+    {
+        if (!$eventRegistration->isValidToken($token)) {
+            return $this->redirectToRoute('landing_home');
         }
 
-        return $this->render('landing/thank_you.html.twig', [
-            'event' => $event
-        ]);
+        if ($eventRegistration->getStatus() === EventRegistration::STATUS_CREATED) {
+            $eventRegistration->setStatus(EventRegistration::STATUS_CONFIRMED);
+            $em->flush();
+
+            $mailer->sendEventSuccessRegistration($eventRegistration);
+        }
+
+        $this->addFlash('success', (new FakeTranslator())->trans('landing.confirmRegistration.flash.success'));
+        return $this->redirectToRoute('landing_home');
     }
 
     /**
      * @Route("/contact", name="landing_contact")
      */
-    public function contact()
+    public function contact(Request $request, AppMailer $mailer)
     {
-        return $this->render('landing/contact.html.twig');
+        $form = $this->createForm(ContactType::class)
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $mailer->sendContact($form->getData());
+            $this->addFlash('success', (new FakeTranslator())->trans('landing.contact.flash.success'));
+            return $this->redirectToRoute('landing_home');
+        }
+
+        return $this->render('landing/contact.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**

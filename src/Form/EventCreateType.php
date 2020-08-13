@@ -39,6 +39,7 @@ class EventCreateType extends AbstractType
             ])
             ->add('preview', CKEditorType::class, [
                 'label' => $trans->trans('admin.event.create.form.preview'),
+                'config_name' => 'basic_config',
                 'required' => true,
                 'constraints'=>[
                     new NotBlank(),
@@ -46,6 +47,7 @@ class EventCreateType extends AbstractType
             ])
             ->add('description', CKEditorType::class, [
                 'label' => $trans->trans('admin.event.create.form.description'),
+                'config_name' => 'basic_config',
                 'required' => true,
                 'constraints'=>[
                     new NotBlank(),

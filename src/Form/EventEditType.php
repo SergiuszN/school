@@ -35,9 +35,11 @@ class EventEditType extends AbstractType
             ])
             ->add('preview', CKEditorType::class, [
                 'label' => $trans->trans('admin.event.edit.form.preview'),
+                'config_name' => 'basic_config',
             ])
             ->add('description', CKEditorType::class, [
                 'label' => $trans->trans('admin.event.edit.form.description'),
+                'config_name' => 'basic_config',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => $trans->trans('admin.event.edit.form.submit'),

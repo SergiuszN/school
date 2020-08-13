@@ -4,21 +4,9 @@
     <section class="pt-3 pb-3 pt-md-5 pb-md-5">
         <div class="container">
             <h1 class="display-5 text-center">{{ 'landing.contact.title'|trans }}</h1>
-            <form class="bg-white px-5 pt-5 pb-5 rounded shadow-sm bg-light">
-                <div class="form-group">
-                    <label for="contact-name">Ім’я</label>
-                    <input type="text" class="form-control" id="contact-name">
-                </div>
-                <div class="form-group">
-                    <label for="contact-email">Email</label>
-                    <input type="email" class="form-control" id="contact-email">
-                </div>
-                <div class="form-group">
-                    <label for="contact-question">Питання</label>
-                    <textarea class="form-control" id="contact-question"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Надіслати</button>
-            </form>
+            <div class="bg-white px-5 pt-5 pb-5 rounded shadow-sm bg-light">
+                {{ form(form) }}
+            </div>
         </div>
     </section>
 {% endblock %}

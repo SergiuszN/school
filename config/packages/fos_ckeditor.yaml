@@ -1,0 +1,13 @@
+fos_ck_editor:
+    default_config: basic_config
+    configs:
+        basic_config:
+            toolbar: full
+            filebrowserBrowseRoute: file_manager
+            filebrowserBrowseRouteParameters:
+                conf: files
+                module: ckeditor
+            filebrowserImageBrowseRoute: file_manager
+            filebrowserImageBrowseRouteParameters:
+                conf: images
+                module: ckeditor

@@ -43,6 +43,7 @@ class PostEditType extends AbstractType
             ])
             ->add('preview', CKEditorType::class, [
                 'label' => $trans->trans('admin.blog.post.edit.form.preview'),
+                'config_name' => 'basic_config',
                 'required' => true,
                 'constraints' => [
                     new NotBlank(),
@@ -50,6 +51,7 @@ class PostEditType extends AbstractType
             ])
             ->add('content', CKEditorType::class, [
                 'label' => $trans->trans('admin.blog.post.edit.form.content'),
+                'config_name' => 'basic_config',
                 'required' => true,
                 'constraints' => [
                     new NotBlank(),

@@ -148,4 +148,14 @@ class EventRegistration
 
         return $this;
     }
+
+    public function getToken(): string
+    {
+        return md5($this->getId() . $this->getEmail());
+    }
+
+    public function isValidToken($token)
+    {
+        return $this->getToken() === $token;
+    }
 }

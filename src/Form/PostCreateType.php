@@ -43,6 +43,7 @@ class PostCreateType extends AbstractType
             ])
             ->add('preview', CKEditorType::class, [
                 'label' => $trans->trans('admin.blog.post.create.form.preview'),
+                'config_name' => 'basic_config',
                 'required' => true,
                 'constraints' => [
                     new NotBlank(),
@@ -50,6 +51,7 @@ class PostCreateType extends AbstractType
             ])
             ->add('content', CKEditorType::class, [
                 'label' => $trans->trans('admin.blog.post.create.form.content'),
+                'config_name' => 'basic_config',
                 'required' => true,
                 'constraints' => [
                     new NotBlank(),

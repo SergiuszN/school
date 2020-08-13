@@ -11,8 +11,7 @@
             <a style="text-decoration:none;color: inherit;" href="{{ path('landing_blog_post', {'post': post.id}) }}">
                 <h2 class="mb-3">{{ post.name }}</h2>
             </a>
-            <img src="{{ post.image }}" alt="{{ post.name }}" class="img-fluid mb-3">
-            <div class="mb-3">
+            <div class="mb-3 responsive-image-container">
                 {{ post.content|raw }}
             </div>
         </article>

@@ -1,0 +1,9 @@
+<p>Вітаю!</p>
+<p>
+    {% set url = absolute_url(path('landing_confirm_registration', {'eventRegistration': eventRegistration.id, 'token': eventRegistration.token})) %}
+    Ви щойно зареєструвались на курс «{{ eventRegistration.event.name }}».
+    Для завершення процесу реєстрації будь-ласка, перейдіть за <a href="{{ url }}">посиланням</a> та
+    підтвердіть свій e-mail.
+</p>
+<p><a href="{{ url }}">{{ url }}</a></p>
+

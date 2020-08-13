@@ -52,3 +52,8 @@ h1 {
 .card-header {
     background-color: #FDF0D9!important;
 }
+
+.responsive-image-container img {
+    width: 100% !important;
+    height: auto !important;
+}
