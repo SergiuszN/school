@@ -36,6 +36,9 @@ class PostEditType extends AbstractType
             ])
             ->add('image', TextType::class, [
                 'label' => $trans->trans('admin.blog.post.edit.form.image'),
+                'attr' => [
+                    'class' => 'form-control control-file-manager'
+                ],
                 'required' => true,
             ])
             ->add('isActive', CheckboxType::class, [

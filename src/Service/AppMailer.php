@@ -28,14 +28,20 @@ class AppMailer
         $this->twig = $twig;
     }
 
-    private function send($to, $subject, $template, $params = [])
+    private function send($to, $subject, $template, $params = [], $attachments = [])
     {
-        /** @noinspection PhpUnhandledExceptionInspection */
-        $this->mailer->send((new Email())
+        $email = (new Email())
             ->from(Address::fromString("ACNN_SCHOOL <{$this->fromEmail}>"))
             ->to($to)
             ->subject($subject)
-            ->html($this->twig->render($template, $params)));
+            ->html($this->twig->render($template, $params));
+
+        foreach ($attachments as $attachment) {
+            $email->attachFromPath($attachment[0], $attachment[1]);
+        }
+
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $this->mailer->send($email);
     }
 
     public function sendContact(ContactDTO $contactDTO)
@@ -72,6 +78,10 @@ class AppMailer
             'emails/event_success_registration.html.twig',
             [
                 'eventRegistration' => $eventRegistration,
+            ],
+            [
+                [__DIR__ . '/../../public' . $eventRegistration->getEvent()->getProgram(), 'Програма курсу'],
+                [__DIR__ . '/../../public' . $eventRegistration->getEvent()->getInvoice(), 'Рахунок']
             ]
         );
     }

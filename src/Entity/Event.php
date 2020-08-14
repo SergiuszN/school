@@ -53,6 +53,16 @@ class Event
      */
     private $registrations;
 
+    /**
+     * @ORM\Column(type="string", length=255, options={"default":""})
+     */
+    private $invoice;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default":""})
+     */
+    private $program;
+
     public function __construct()
     {
         $this->registrations = new ArrayCollection();
@@ -150,6 +160,30 @@ class Event
                 $registration->setEvent(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getInvoice(): ?string
+    {
+        return $this->invoice;
+    }
+
+    public function setInvoice(string $invoice): self
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    public function getProgram(): ?string
+    {
+        return $this->program;
+    }
+
+    public function setProgram(string $program): self
+    {
+        $this->program = $program;
 
         return $this;
     }

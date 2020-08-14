@@ -41,6 +41,7 @@
                                 </a>
                             </td>
                             <td>
+                                <a target="_blank" href="{{ path('landing_blog_post', {'post': post.id}) }}"><i class="fa fas fa-eye"></i></a>
                                 <a href="{{ path('admin_blog_post_edit', {'post': post.id}) }}"><i class="fa fas fa-pencil-alt"></i></a>
                                 <a href="{{ path('admin_blog_post_remove', {'post': post.id}) }}" onclick="return confirm('{{ 'admin.blog.post.list.confirm.remove'|trans }}')">
                                     <i class="fa fas fa-trash"></i>

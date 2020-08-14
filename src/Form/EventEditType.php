@@ -33,6 +33,20 @@ class EventEditType extends AbstractType
             ->add('price', NumberType::class, [
                 'label' => $trans->trans('admin.event.edit.form.price'),
             ])
+            ->add('invoice', TextType::class, [
+                'label' => $trans->trans('admin.event.edit.form.invoice'),
+                'attr' => [
+                    'class' => 'form-control control-file-manager'
+                ],
+                'required' => true,
+            ])
+            ->add('program', TextType::class, [
+                'label' => $trans->trans('admin.event.edit.form.program'),
+                'attr' => [
+                    'class' => 'form-control control-file-manager'
+                ],
+                'required' => true,
+            ])
             ->add('preview', CKEditorType::class, [
                 'label' => $trans->trans('admin.event.edit.form.preview'),
                 'config_name' => 'basic_config',

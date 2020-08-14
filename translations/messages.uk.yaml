@@ -29,6 +29,7 @@ landing:
         categories: 'Категорії'
         readMore: 'Читати далі'
         categoriesAll: 'Всі'
+        back: 'Назад'
     contact:
         title: "Зв'язатися з нами"
         form:
@@ -61,6 +62,8 @@ admin:
                 preview: "Прев'ю"
                 description: 'Опис'
                 submit: 'Створити'
+                invoice: 'Рахунок'
+                program: 'Програма'
         edit:
             success: 'Подія успішно змінена'
             form:
@@ -70,6 +73,8 @@ admin:
                 preview: "Прев'ю"
                 description: 'Опис'
                 submit: 'Змінити'
+                invoice: 'Рахунок'
+                program: 'Програма'
         remove:
             success: 'Подія успішно видалена'
         list:
@@ -169,6 +174,7 @@ components:
             events: 'Події'
             posts: 'Статті'
             categories: 'Категорії'
+            fileManager: 'Управління файлами'
         topbar:
             logout: 'Вихід'
     landing:

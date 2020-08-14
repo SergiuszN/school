@@ -67,6 +67,30 @@
             });
         });
     </script>
+
+    <script>
+        function loadFileManager() {
+            if ($('.control-file-manager').length === 0) {
+                return;
+            }
+
+            let $input = null;
+
+            $('.control-file-manager').click(function () {
+                $input = $(this);
+                $('#file-manager-modal').modal();
+            });
+
+            $('#file-manager-modal-frame').on('load', function () {
+                $('#file-manager-modal-frame').contents().on('click', '.select', function () {
+                    $input.val($(this).attr('data-path'));
+                    $('#file-manager-modal').modal('hide');
+                });
+            });
+        }
+
+        loadFileManager();
+    </script>
 {% endblock %}
 </body>
 </html>

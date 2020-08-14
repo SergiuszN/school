@@ -37,6 +37,20 @@ class EventCreateType extends AbstractType
                 'label' => $trans->trans('admin.event.create.form.price'),
                 'required' => true,
             ])
+            ->add('invoice', TextType::class, [
+                'label' => $trans->trans('admin.event.create.form.invoice'),
+                'attr' => [
+                    'class' => 'form-control control-file-manager'
+                ],
+                'required' => true,
+            ])
+            ->add('program', TextType::class, [
+                'label' => $trans->trans('admin.event.create.form.program'),
+                'attr' => [
+                    'class' => 'form-control control-file-manager'
+                ],
+                'required' => true,
+            ])
             ->add('preview', CKEditorType::class, [
                 'label' => $trans->trans('admin.event.create.form.preview'),
                 'config_name' => 'basic_config',

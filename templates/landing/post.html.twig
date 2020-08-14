@@ -11,8 +11,12 @@
             <a style="text-decoration:none;color: inherit;" href="{{ path('landing_blog_post', {'post': post.id}) }}">
                 <h2 class="mb-3">{{ post.name }}</h2>
             </a>
+            <img src="{{ post.image }}" alt="" style="width: 100%; height: auto;">
             <div class="mb-3 responsive-image-container">
                 {{ post.content|raw }}
+            </div>
+            <div class="mb-3">
+                <a class="btn btn-primary btn-lg" href="{{ path('landing_blog') }}">{{ 'landing.blog.back'|trans }}</a>
             </div>
         </article>
     </div>

@@ -2,6 +2,6 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 artgris_bundle_file_manager:
-    resource: "@ArtgrisFileManagerBundle/Controller"
+    resource: "@ArtgrisFileManagerBundle/Controller/ManagerController.php"
     type:     annotation
     prefix:   /admin/art-file-manager

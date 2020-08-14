@@ -31,6 +31,15 @@
 
     <hr class="sidebar-divider d-none d-md-block">
 
+    <div class="nav-item">
+        <a class="nav-link" href="{{ path('file_manager', {'conf': 'default'}) }}" target="_blank">
+            <i class="fas fa-fw fa-folder"></i>
+            <span>{{ 'components.admin.sidebar.fileManager'|trans }}</span>
+        </a>
+    </div>
+
+    <hr class="sidebar-divider d-none d-md-block">
+
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
