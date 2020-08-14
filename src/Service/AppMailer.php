@@ -85,4 +85,16 @@ class AppMailer
             ]
         );
     }
+
+    public function sendEventPayedRegistration(EventRegistration $eventRegistration)
+    {
+        $this->send(
+            $eventRegistration->getEmail(),
+            "Оплату отримано.",
+            'emails/event_payed.html.twig',
+            [
+                'eventRegistration' => $eventRegistration,
+            ]
+        );
+    }
 }

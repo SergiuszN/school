@@ -165,6 +165,7 @@ admin:
                     phone: 'Телефон'
                     created: 'Дата'
                     status: 'Статус'
+                    actions: 'Акції'
                 back: 'Назад'
 components:
     admin:

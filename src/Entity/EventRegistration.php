@@ -142,6 +142,18 @@ class EventRegistration
         return $this->status;
     }
 
+    public function getStatusString(): ?string
+    {
+        switch ($this->status) {
+            case self::STATUS_CREATED:
+                return 'Зареєструвався';
+            case self::STATUS_CONFIRMED:
+                return 'Підтверджено';
+            case self::STATUS_PAYED:
+                return 'Сплачено';
+        }
+    }
+
     public function setStatus(int $status): self
     {
         $this->status = $status;

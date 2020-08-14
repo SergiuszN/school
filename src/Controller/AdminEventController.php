@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\EventRegistration;
 use App\Form\EventCreateType;
 use App\Form\EventEditType;
 use App\Repository\EventRepository;
+use App\Service\AppMailer;
 use App\Util\FakeTranslator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -85,5 +87,20 @@ class AdminEventController extends AbstractController
         return $this->render('admin/event/subscriber_list.html.twig', [
             'subscribers' => $event->getRegistrations()
         ]);
+    }
+
+    /**
+     * @Route("/subscriber-payed/{registration}", name="admin_event_subscriber_payed")
+     */
+    public function subscriberPayed(EventRegistration $registration, EntityManagerInterface $em, AppMailer $mailer)
+    {
+        if ($registration->getStatus() === EventRegistration::STATUS_CONFIRMED) {
+            $mailer->sendEventPayedRegistration($registration);
+
+            $registration->setStatus(EventRegistration::STATUS_PAYED);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('admin_event_subscribers', ['event' => $registration->getId()]);
     }
 }
