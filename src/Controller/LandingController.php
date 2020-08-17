@@ -90,11 +90,12 @@ class LandingController extends AbstractController
         }
 
         if ($eventRegistration->getStatus() === EventRegistration::STATUS_CREATED) {
+            $mailer->sendEventSuccessRegistration($eventRegistration);
+
             $eventRegistration->setStatus(EventRegistration::STATUS_CONFIRMED);
             $em->flush();
 
             $telegramNotify->sendRegistrationNotify($eventRegistration);
-            $mailer->sendEventSuccessRegistration($eventRegistration);
         }
 
         $this->addFlash('success', (new FakeTranslator())->trans('landing.confirmRegistration.flash.success'));
