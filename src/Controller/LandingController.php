@@ -14,11 +14,13 @@ use App\Repository\PostCategoryRepository;
 use App\Repository\PostRepository;
 use App\Security\Voters\EventVoter;
 use App\Service\AppMailer;
+use App\Service\TelegramNotify;
 use App\Util\FakeTranslator;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -81,7 +83,7 @@ class LandingController extends AbstractController
     /**
      * @Route("/confirm-registration/{eventRegistration}-{token}", name="landing_confirm_registration")
      */
-    public function confirmRegistration(EventRegistration $eventRegistration, $token, EntityManagerInterface $em, AppMailer $mailer)
+    public function confirmRegistration(EventRegistration $eventRegistration, $token, EntityManagerInterface $em, AppMailer $mailer, TelegramNotify $telegramNotify)
     {
         if (!$eventRegistration->isValidToken($token)) {
             return $this->redirectToRoute('landing_home');
@@ -91,6 +93,7 @@ class LandingController extends AbstractController
             $eventRegistration->setStatus(EventRegistration::STATUS_CONFIRMED);
             $em->flush();
 
+            $telegramNotify->sendRegistrationNotify($eventRegistration);
             $mailer->sendEventSuccessRegistration($eventRegistration);
         }
 

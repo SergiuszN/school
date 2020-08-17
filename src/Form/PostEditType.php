@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,6 +30,13 @@ class PostEditType extends AbstractType
                 'label' => $trans->trans('admin.blog.post.edit.form.name'),
                 'required' => true,
             ])
+            ->add('description', TextareaType::class, [
+                'label' => $trans->trans('admin.blog.post.edit.form.description'),
+                'attr' => [
+                    'maxlength' => 160,
+                ],
+                'required' => true,
+            ])
             ->add('category', EntityType::class, [
                 'class' => PostCategory::class,
                 'label' => $trans->trans('admin.blog.post.edit.form.category'),
@@ -39,7 +47,7 @@ class PostEditType extends AbstractType
                 'attr' => [
                     'class' => 'form-control control-file-manager'
                 ],
-                'required' => true,
+                'required' => false,
             ])
             ->add('isActive', CheckboxType::class, [
                 'label' => $trans->trans('admin.blog.post.create.form.isActive'),

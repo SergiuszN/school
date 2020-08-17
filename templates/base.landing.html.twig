@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>{% block title %}{{ 'base.landing.title'|trans }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}ACNN_SCHOOL - он-лайн школа професійного розвитку та особистої ефективності для бухгалтерів, фінансистів та підприємців{% endblock %}">
+
+    <meta property="og:title" content="{% block og_title %}{{ block('title') }}{% endblock %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ app.request.uri }}" />
+    <meta property="og:image" content="{% block og_image %}{{ absolute_url(asset('apple-touch-icon.png')) }}{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}{{ block('description') }}{% endblock %}" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">

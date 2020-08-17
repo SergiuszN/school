@@ -90,7 +90,7 @@ class AdminEventController extends AbstractController
     }
 
     /**
-     * @Route("/subscriber-payed/{registration}", name="admin_event_subscriber_payed")
+     * @Route("/subscriber/{registration}/payed", name="admin_event_subscriber_payed")
      */
     public function subscriberPayed(EventRegistration $registration, EntityManagerInterface $em, AppMailer $mailer)
     {
@@ -101,6 +101,39 @@ class AdminEventController extends AbstractController
             $em->flush();
         }
 
-        return $this->redirectToRoute('admin_event_subscribers', ['event' => $registration->getId()]);
+        return $this->redirectToRoute('admin_event_subscribers', ['event' => $registration->getEvent()->getId()]);
+    }
+
+    /**
+     * @Route("/subscriber/{registration}/remove", name="admin_event_subscriber_remove")
+     */
+    public function subscriberRemove(EventRegistration $registration, EntityManagerInterface $em)
+    {
+        $eventId = $registration->getEvent()->getId();
+
+        $em->remove($registration);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_event_subscribers', ['event' => $eventId]);
+    }
+
+    /**
+     * @Route("/subscriber/{registration}/resend", name="admin_event_subscriber_resend")
+     */
+    public function subscriberResendMail(EventRegistration $registration, AppMailer $mailer)
+    {
+        switch ($registration->getStatus()) {
+            case EventRegistration::STATUS_PAYED:
+                $mailer->sendEventPayedRegistration($registration);
+                break;
+            case EventRegistration::STATUS_CONFIRMED:
+                $mailer->sendEventSuccessRegistration($registration);
+                break;
+            case EventRegistration::STATUS_CREATED:
+                $mailer->sendEventConfirmRegistration($registration);
+                break;
+        }
+
+        return $this->redirectToRoute('admin_event_subscribers', ['event' => $registration->getEvent()->getId()]);
     }
 }

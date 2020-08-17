@@ -7,7 +7,7 @@ landing:
     home:
         title: 'ACNN_SCHOOL'
         lead: 'он-лайн школа професійного розвитку та особистої ефективності для бухгалтерів, фінансистів та підприємців'
-        meta: 'МОЯ МЕТА – ЦЕ ВАШ РЕЗУЛЬТАТ'
+        meta: 'НАША МЕТА – ЦЕ ВАШ РЕЗУЛЬТАТ'
     eventRegistration:
         create:
             form:
@@ -93,6 +93,7 @@ admin:
                     content: 'Контент'
                     submit: 'Змінити'
                     category: 'Категорія'
+                    description: 'Мета Опис'
                 header: 'Змінити статтю'
             create:
                 success: 'Стаття успішно створена'
@@ -104,6 +105,7 @@ admin:
                     submit: 'Створити'
                     isActive: 'Видимий'
                     category: 'Категорія'
+                    description: 'Мета Опис'
                 header: 'Створити нову статтю'
             list:
                 confirm:
@@ -166,6 +168,12 @@ admin:
                     created: 'Дата'
                     status: 'Статус'
                     actions: 'Акції'
+                    actionsPayed: 'Сплачено'
+                    actionsPayedAlert: 'Ви дійсно бажаєте змінити статус?'
+                    actionsRemove: 'Видалити'
+                    actionsRemoveAlert: 'Чи ви насправді хочете видалити цього учасника?'
+                    actionsResend: 'Надіслати мейл'
+                    actionsResendAlert: 'Ви дійсно хочете відправити емейл ще раз?'
                 back: 'Назад'
 components:
     admin:

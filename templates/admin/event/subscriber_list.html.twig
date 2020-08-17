@@ -31,8 +31,24 @@
                             <td>{{ subscriber.statusString }}</td>
                             <td>
                                 {% if subscriber.status == constant('App\\Entity\\EventRegistration::STATUS_CONFIRMED') %}
-                                    <a href="{{ path('admin_event_subscriber_payed', {'registration': subscriber.id}) }}" class="btn btn-info btn-sm">Сплачено</a>
+                                    <a href="{{ path('admin_event_subscriber_payed', {'registration': subscriber.id}) }}"
+                                       class="btn btn-info btn-sm mb-2"
+                                       onclick="return confirm('{{ 'admin.blog.eventSubscriber.list.table.actionsPayedAlert'|trans }}')">
+                                        {{ 'admin.blog.eventSubscriber.list.table.actionsPayed'|trans }}
+                                    </a>
                                 {% endif %}
+
+                                <a href="{{ path('admin_event_subscriber_resend', {'registration': subscriber.id}) }}"
+                                   class="btn btn-warning btn-sm mb-2"
+                                   onclick="return confirm('{{ 'admin.blog.eventSubscriber.list.table.actionsResendAlert'|trans }}')">
+                                    {{ 'admin.blog.eventSubscriber.list.table.actionsResend'|trans }}
+                                </a>
+
+                                <a href="{{ path('admin_event_subscriber_remove', {'registration': subscriber.id}) }}"
+                                   class="btn btn-danger btn-sm mb-2"
+                                   onclick="return confirm('{{ 'admin.blog.eventSubscriber.list.table.actionsRemoveAlert'|trans }}')">
+                                    {{ 'admin.blog.eventSubscriber.list.table.actionsRemove'|trans }}
+                                </a>
                             </td>
                         </tr>
                     {% endfor %}

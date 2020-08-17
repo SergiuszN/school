@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app_email: '%env(resolve:APP_EMAIL)%'
+    telegram_bot_id: '%env(resolve:TELEGRAM_BOT_ID)%'
+    telegram_bot_chat: '%env(resolve:TELEGRAM_BOT_CHAT)%'
 
 services:
     # default configuration for services in *this* file
