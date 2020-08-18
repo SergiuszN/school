@@ -80,8 +80,8 @@ class AppMailer
                 'eventRegistration' => $eventRegistration,
             ],
             [
-                [__DIR__ . '/../../public' . $eventRegistration->getEvent()->getProgram(), 'Програма курсу'],
-                [__DIR__ . '/../../public' . $eventRegistration->getEvent()->getInvoice(), 'Рахунок']
+                [__DIR__ . '/../../public' . $eventRegistration->getEvent()->getProgram(), 'Програма курсу.pdf'],
+                [__DIR__ . '/../../public' . $eventRegistration->getEvent()->getInvoice(), 'Рахунок.pdf']
             ]
         );
     }
