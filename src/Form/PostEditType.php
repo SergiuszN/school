@@ -51,6 +51,7 @@ class PostEditType extends AbstractType
             ])
             ->add('isActive', CheckboxType::class, [
                 'label' => $trans->trans('admin.blog.post.create.form.isActive'),
+                'required' => false,
             ])
             ->add('preview', CKEditorType::class, [
                 'label' => $trans->trans('admin.blog.post.edit.form.preview'),

@@ -178,7 +178,7 @@ class LandingController extends AbstractController
      */
     public function blogPost(Post $post)
     {
-        if (!$post->getIsActive()) {
+        if (!$this->getUser() && !$post->getIsActive()) {
             throw $this->createNotFoundException();
         }
 
