@@ -6,6 +6,12 @@
             <div class="col-12 col-md-8">
                 <h1 class="display-4 font-weight-bold">{{ event.name }}</h1>
                 {{ event.description|raw }}
+
+                {% if event.program %}
+                    <a href="{{ absolute_url(event.program) }}">
+                        {{ 'landing.register.readProgram'|trans }}
+                    </a>
+                {% endif %}
             </div>
             <div class="col-12 col-md-4">
                 <div class="p-3 bg-light rounded">
