@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Event
 {
-    const AVAILABLE_FOR_REGISTRATION = '+3 month';
+    const AVAILABLE_FOR_REGISTRATION = '+6 month';
 
     /**
      * @ORM\Id()
