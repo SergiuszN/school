@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\DTO\ContactDTO;
 use App\Entity\Event;
 use App\Entity\EventRegistration;
 use App\Entity\Post;
 use App\Entity\PostCategory;
+use App\Entity\Testimonial;
+use App\Form\AddTestimonialType;
 use App\Form\ContactType;
 use App\Form\EventRegistrationCreateType;
 use App\Repository\EventRepository;
@@ -20,7 +21,6 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -184,6 +184,34 @@ class LandingController extends AbstractController
 
         return $this->render('landing/post.html.twig', [
             'post' => $post
+        ]);
+    }
+
+    /**
+     * @Route("/testimonials/{page}", name="landing_testimonials", defaults={"page" = 1}, requirements={"page" = "\d+"})
+     */
+    public function testimonials(int $page, Request $request, PaginatorInterface $paginator, EntityManagerInterface $em, TelegramNotify $telegramNotify)
+    {
+        $form = $this->createForm(AddTestimonialType::class)
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Testimonial $testimonial */
+            $testimonial = $form->getData();
+            $em->persist($testimonial);
+            $em->flush();
+
+            $telegramNotify->sendTestimonialNotify($testimonial);
+
+            $this->addFlash('success', (new FakeTranslator())->trans('landing.testimonial.flash.success'));
+            return $this->redirectToRoute('landing_home');
+        }
+
+        return $this->render('landing/testimonials.html.twig', [
+            'form' => $form->createView(),
+            'page' => $paginator->paginate(
+                $em->getRepository(Testimonial::class)->findLandingKnp(), $page, Testimonial::MAX_PER_PAGE_LANDING
+            ),
         ]);
     }
 }

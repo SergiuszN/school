@@ -43,6 +43,15 @@ landing:
     confirmRegistration:
         flash:
             success: 'Реєстрація успішно підтверджена'
+    testimonial:
+        form:
+            header: 'Додати відгук'
+            name: 'Ім’я'
+            content: 'Відгук'
+            rating: 'Рейтинг'
+            submit: 'Надіслати'
+        flash:
+            success: 'Відгук успішно доданий'
 security:
     login:
         form:
@@ -176,6 +185,18 @@ admin:
                     actionsResend: 'Надіслати мейл'
                     actionsResendAlert: 'Ви дійсно хочете відправити емейл ще раз?'
                 back: 'Назад'
+    testimonial:
+        list:
+            header: 'Відгуки'
+            table:
+                name: 'Ім’я'
+                date: 'Дата'
+                content: 'Контент'
+                rating: 'Рейтинг'
+                isActive: 'Видимий'
+                actions: 'Акції'
+            confirm:
+                remove: 'Видалити'
 components:
     admin:
         sidebar:
@@ -185,6 +206,7 @@ components:
             posts: 'Статті'
             categories: 'Категорії'
             fileManager: 'Управління файлами'
+            testimonials: 'Відгуки'
         topbar:
             logout: 'Вихід'
     landing:
@@ -199,6 +221,7 @@ components:
                 contact: 'Запитання'
                 tac: 'Правила Користування Сайтом'
                 pp: 'Політика Конфеденційності'
+                testimonials: 'Відгуки'
             copy: '- © Наталія Ніколенко,'
 error:
     404:
@@ -257,7 +280,7 @@ table:
     dimension: Параметры
     actions: Действия
 confirm:
-    delete:  Вы уверены что хотите удалить?
+    delete: Вы уверены что хотите удалить?
 size:
     mb: MB
     kb: kB

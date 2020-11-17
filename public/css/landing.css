@@ -57,3 +57,15 @@ h1 {
     width: 100% !important;
     height: auto !important;
 }
+
+.rating-input-star {
+    cursor: pointer;
+}
+
+.rating-input-star:hover {
+    color: #fad390!important;
+}
+
+.rating-input-star.active {
+    color: #ffc107;
+}

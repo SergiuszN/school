@@ -34,6 +34,9 @@
                 <li class="nav-item {% if app.request.get('_route') == 'landing_contact' %}active{% endif %}">
                     <a class="nav-link" href="{{ path('landing_contact') }}">{{ 'components.landing.header.menu.contact'|trans }}</a>
                 </li>
+                <li class="nav-item {% if app.request.get('_route') == 'landing_testimonials' %}active{% endif %}">
+                    <a class="nav-link" href="{{ path('landing_testimonials') }}">{{ 'components.landing.header.menu.testimonials'|trans }}</a>
+                </li>
                 <li class="nav-item {% if app.request.get('_route') == 'landing_about' %}active{% endif %}">
                     <a class="nav-link" href="{{ path('landing_about') }}">{{ 'components.landing.header.menu.about'|trans }}</a>
                 </li>
