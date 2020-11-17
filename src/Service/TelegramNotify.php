@@ -55,7 +55,5 @@ class TelegramNotify
         curl_setopt($handle, CURLOPT_URL, "https://api.telegram.org/bot{$this->id}/sendMessage?chat_id={$this->chat}&parse_mode=markdown&text=$message");
         curl_exec($handle);
         curl_close($handle);
-
-        die();
     }
 }
