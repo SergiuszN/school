@@ -10,4 +10,9 @@ class FakeTranslator implements TranslatorInterface
     {
         return $id;
     }
+
+    public function getLocale(): string
+    {
+        return 'en';
+    }
 }

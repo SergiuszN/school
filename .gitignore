@@ -18,3 +18,8 @@
 .idea
 /public/uploads/*
 /*.sql
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
