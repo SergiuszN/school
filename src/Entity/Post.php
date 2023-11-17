@@ -4,61 +4,42 @@ namespace App\Entity;
 
 use App\Repository\PostRepository;
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=PostRepository::class)
- */
+#[ORM\Entity(repositoryClass: PostRepository::class)]
 class Post
 {
     const MAX_PER_PAGE_LANDING = 10;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name;
 
-    /**
-     * @ORM\Column(type="string", length=161)
-     */
-    private $description;
+    #[ORM\Column(type: Types::STRING, length: 161)]
+    private ?string $description;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $image;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $preview;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $preview;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $content;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?DateTimeInterface $created;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=PostCategory::class, inversedBy="posts")
-     */
-    private $category;
+    #[ORM\ManyToOne(targetEntity: PostCategory::class, inversedBy: 'posts')]
+    private ?PostCategory $category;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isActive;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private ?bool $isActive;
 
     public function getId(): ?int
     {

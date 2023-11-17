@@ -6,62 +6,45 @@ use App\Repository\EventRepository;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=EventRepository::class)
- */
+#[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
 {
     const AVAILABLE_FOR_REGISTRATION = '+6 month';
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id;
+
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?DateTimeInterface $date;
+
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $price;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $preview;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var ArrayCollection|EventRegistration[]
      */
-    private $name;
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventRegistration::class)]
+    private Collection|array $registrations;
 
-    /**
-     * @var DateTimeInterface|null
-     * @ORM\Column(type="date")
-     */
-    private $date;
+    #[ORM\Column(type: Types::STRING, length: 255, options: ['default' => ''])]
+    private string $invoice;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $price;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $preview;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
-
-    /**
-     * @ORM\OneToMany(targetEntity=EventRegistration::class, mappedBy="event")
-     */
-    private $registrations;
-
-    /**
-     * @ORM\Column(type="string", length=255, options={"default":""})
-     */
-    private $invoice;
-
-    /**
-     * @ORM\Column(type="string", length=255, options={"default":""})
-     */
-    private $program;
+    #[ORM\Column(type: Types::STRING, length: 255, options: ['default' => ''])]
+    private string $program;
 
     public function __construct()
     {
@@ -134,9 +117,9 @@ class Event
     }
 
     /**
-     * @return Collection|EventRegistration[]
+     * @return ArrayCollection|EventRegistration[]
      */
-    public function getRegistrations(): Collection
+    public function getRegistrations(): Collection|array
     {
         return $this->registrations;
     }

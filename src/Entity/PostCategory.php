@@ -5,34 +5,25 @@ namespace App\Entity;
 use App\Repository\PostCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=PostCategoryRepository::class)
- */
+#[ORM\Entity(repositoryClass: PostCategoryRepository::class)]
 class PostCategory
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="category")
-     */
-    private $posts;
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class)]
+    private Collection|array $posts;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isActive;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private ?bool $isActive;
 
     public function __construct()
     {
@@ -64,7 +55,7 @@ class PostCategory
     /**
      * @return Collection|Post[]
      */
-    public function getPosts(): Collection
+    public function getPosts(): Collection|array
     {
         return $this->posts;
     }

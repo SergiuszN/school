@@ -5,45 +5,33 @@ namespace App\Entity;
 use App\Repository\TestimonialRepository;
 use DateTime;
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=TestimonialRepository::class)
- */
+#[ORM\Entity(repositoryClass: TestimonialRepository::class)]
 class Testimonial
 {
     const MAX_PER_PAGE_LANDING = 5;
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $created;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?DateTimeInterface $created;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $content;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $rating;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $content;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isActive;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?string $rating;
+
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private ?bool $isActive;
 
     /**
      * Testimonial constructor.

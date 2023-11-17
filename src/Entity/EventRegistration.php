@@ -4,61 +4,42 @@ namespace App\Entity;
 
 use App\Repository\EventRegistrationRepository;
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=EventRegistrationRepository::class)
- */
+#[ORM\Entity(repositoryClass: EventRegistrationRepository::class)]
 class EventRegistration
 {
     const STATUS_CREATED = 0;
     const STATUS_CONFIRMED = 10;
     const STATUS_PAYED = 100;
 
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id;
 
-    /**
-     * @var Event
-     * @ORM\ManyToOne(targetEntity=Event::class, inversedBy="registrations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $event;
+    #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'registrations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Event $event;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $name;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $accepted;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private ?bool $accepted;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $email;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $email;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $phone;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $phone;
 
-    /**
-     * @var DateTimeInterface
-     * @ORM\Column(type="datetime")
-     */
-    private $created;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?DateTimeInterface $created;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $status;
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private ?int $status;
 
     public function getId(): ?int
     {
@@ -144,14 +125,13 @@ class EventRegistration
 
     public function getStatusString(): ?string
     {
-        switch ($this->status) {
-            case self::STATUS_CREATED:
-                return 'Зареєструвався';
-            case self::STATUS_CONFIRMED:
-                return 'Підтверджено';
-            case self::STATUS_PAYED:
-                return 'Сплачено';
-        }
+        return match ($this->status) {
+            self::STATUS_CREATED => 'Зареєструвався',
+            self::STATUS_CONFIRMED => 'Підтверджено',
+            self::STATUS_PAYED => 'Сплачено',
+            default => null,
+        };
+
     }
 
     public function setStatus(int $status): self
@@ -166,7 +146,7 @@ class EventRegistration
         return md5($this->getId() . $this->getEmail());
     }
 
-    public function isValidToken($token)
+    public function isValidToken($token): bool
     {
         return $this->getToken() === $token;
     }
