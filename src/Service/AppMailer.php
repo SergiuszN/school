@@ -5,21 +5,20 @@ namespace App\Service;
 use App\DTO\ContactDTO;
 use App\Entity\EventRegistration;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class AppMailer
 {
-    /** @var Environment */
-    private $twig;
-
-    /** @var MailerInterface */
-    private $mailer;
-
-    /** @var string */
-    private $fromEmail;
+    private Environment $twig;
+    private MailerInterface $mailer;
+    private string $fromEmail;
 
     public function __construct(ParameterBagInterface $bag, MailerInterface $mailer, Environment $twig)
     {
@@ -28,10 +27,16 @@ class AppMailer
         $this->twig = $twig;
     }
 
-    private function send($to, $subject, $template, $params = [], $attachments = [])
+    /**
+     * @throws SyntaxError
+     * @throws TransportExceptionInterface
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    private function send($to, $subject, $template, $params = [], $attachments = []): void
     {
         $email = (new Email())
-            ->from(Address::fromString("ACNN_SCHOOL <{$this->fromEmail}>"))
+            ->from(Address::create("ACNN_SCHOOL <{$this->fromEmail}>"))
             ->to($to)
             ->subject($subject)
             ->html($this->twig->render($template, $params));
@@ -44,7 +49,13 @@ class AppMailer
         $this->mailer->send($email);
     }
 
-    public function sendContact(ContactDTO $contactDTO)
+    /**
+     * @throws SyntaxError
+     * @throws TransportExceptionInterface
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    public function sendContact(ContactDTO $contactDTO): void
     {
         $this->send(
             $this->fromEmail,
@@ -58,7 +69,13 @@ class AppMailer
         );
     }
 
-    public function sendEventConfirmRegistration(EventRegistration $eventRegistration)
+    /**
+     * @throws SyntaxError
+     * @throws TransportExceptionInterface
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    public function sendEventConfirmRegistration(EventRegistration $eventRegistration): void
     {
         $this->send(
             $eventRegistration->getEmail(),
@@ -70,7 +87,13 @@ class AppMailer
         );
     }
 
-    public function sendEventSuccessRegistration(EventRegistration $eventRegistration)
+    /**
+     * @throws SyntaxError
+     * @throws TransportExceptionInterface
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    public function sendEventSuccessRegistration(EventRegistration $eventRegistration): void
     {
         $this->send(
             $eventRegistration->getEmail(),
@@ -86,7 +109,13 @@ class AppMailer
         );
     }
 
-    public function sendEventPayedRegistration(EventRegistration $eventRegistration)
+    /**
+     * @throws SyntaxError
+     * @throws TransportExceptionInterface
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
+    public function sendEventPayedRegistration(EventRegistration $eventRegistration): void
     {
         $this->send(
             $eventRegistration->getEmail(),

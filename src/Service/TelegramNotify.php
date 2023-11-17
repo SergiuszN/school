@@ -10,14 +10,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class TelegramNotify
 {
-    /** @var string */
-    private $id;
-
-    /** @var string */
-    private $chat;
-
-    /** @var RouterInterface */
-    private $router;
+    private string $id;
+    private string $chat;
+    private RouterInterface $router;
 
     public function __construct(ParameterBagInterface $bag, RouterInterface $router)
     {
@@ -26,7 +21,7 @@ class TelegramNotify
         $this->router = $router;
     }
 
-    public function sendRegistrationNotify(EventRegistration $registration)
+    public function sendRegistrationNotify(EventRegistration $registration): void
     {
         $message = "{$registration->getName()} <{$registration->getEmail()}> зарегестрировался на: {$registration->getEvent()->getName()}";
 
@@ -36,7 +31,7 @@ class TelegramNotify
         curl_close($handle);
     }
 
-    public function sendTestimonialNotify(Testimonial $testimonial)
+    public function sendTestimonialNotify(Testimonial $testimonial): void
     {
         $url = $this->router->generate(
             'admin_testimonial_public',

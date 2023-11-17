@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Post;
 use App\Entity\PostCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -20,7 +21,7 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    public function findLandingKnp()
+    public function findLandingKnp(): QueryBuilder
     {
         return $this->createQueryBuilder('p')
             ->leftJoin('p.category', 'pc')
@@ -29,7 +30,7 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy('p.created', 'DESC');
     }
 
-    public function findLandingKnpWithCategory(PostCategory $category)
+    public function findLandingKnpWithCategory(PostCategory $category): QueryBuilder
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.isActive = 1')
@@ -38,7 +39,7 @@ class PostRepository extends ServiceEntityRepository
             ->orderBy('p.created', 'DESC');
     }
 
-    public function findLatest()
+    public function findLatest(): array
     {
         return $this->findLandingKnp()
             ->setMaxResults(3)

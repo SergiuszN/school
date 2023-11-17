@@ -4,18 +4,10 @@ namespace App\DTO;
 
 class ContactDTO
 {
-    /** @var string|null */
-    private $name;
+    private ?string $name;
+    private ?string $email;
+    private ?string $question;
 
-    /** @var string|null */
-    private $email;
-
-    /** @var string|null */
-    private $question;
-
-    /**
-     * @return string|null
-     */
     public function getName(): ?string
     {
         return $this->name;

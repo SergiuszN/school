@@ -23,7 +23,7 @@ class TestimonialRepository extends ServiceEntityRepository
     /**
      * @return Testimonial[]
      */
-    public function findAllOrderedByDateDesc()
+    public function findAllOrderedByDateDesc(): array
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.created', 'DESC')

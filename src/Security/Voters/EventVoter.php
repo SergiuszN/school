@@ -14,7 +14,7 @@ class EventVoter extends Voter
 
     protected function supports($attribute, $subject): bool
     {
-        if (!in_array($attribute, [self::REGISTER])) {
+        if ($attribute != self::REGISTER) {
             return false;
         }
 
@@ -28,9 +28,8 @@ class EventVoter extends Voter
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         /** @var Event $subject */
-        switch ($attribute) {
-            case self::REGISTER:
-                return $this->canRegister($subject);
+        if ($attribute == self::REGISTER) {
+            return $this->canRegister($subject);
         }
 
         throw new LogicException('This code should not be reached!');

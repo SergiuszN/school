@@ -11,28 +11,24 @@ use App\Service\AppMailer;
 use App\Util\FakeTranslator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/event")
- */
+#[Route('/admin/event')]
 class AdminEventController extends AbstractController
 {
-    /**
-     * @Route("s", name="admin_event_list")
-     */
-    public function list(EventRepository $eventRepository)
+    #[Route('s', name: 'admin_event_list')]
+    public function list(EventRepository $eventRepository): Response
     {
         return $this->render('admin/event/list.html.twig', [
             'events' => $eventRepository->findAll()
         ]);
     }
 
-    /**
-     * @Route("/create", name="admin_event_create")
-     */
-    public function create(Request $request, EntityManagerInterface $em)
+    #[Route('/create', name: 'admin_event_create')]
+    public function create(Request $request, EntityManagerInterface $em): RedirectResponse|Response
     {
         $form = $this->createForm(EventCreateType::class)
             ->handleRequest($request);
@@ -49,10 +45,8 @@ class AdminEventController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/edit/{event}", name="admin_event_edit")
-     */
-    public function edit(Event $event, Request $request, EntityManagerInterface $em)
+    #[Route('/edit/{event}', name: 'admin_event_edit')]
+    public function edit(Event $event, Request $request, EntityManagerInterface $em): RedirectResponse|Response
     {
         $form = $this->createForm(EventEditType::class, $event)
             ->handleRequest($request);
@@ -68,10 +62,8 @@ class AdminEventController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/remove/{event}", name="admin_event_remove")
-     */
-    public function remove(Event $event, EntityManagerInterface $em)
+    #[Route('/remove/{event}', name: 'admin_event_remove')]
+    public function remove(Event $event, EntityManagerInterface $em): RedirectResponse
     {
         $em->remove($event);
         $em->flush();
@@ -79,20 +71,16 @@ class AdminEventController extends AbstractController
         return $this->redirectToRoute('admin_event_list');
     }
 
-    /**
-     * @Route("/subscribers/{event}", name="admin_event_subscribers")
-     */
-    public function subscribers(Event $event)
+    #[Route('/subscribers/{event}', name: 'admin_event_subscribers')]
+    public function subscribers(Event $event): Response
     {
         return $this->render('admin/event/subscriber_list.html.twig', [
             'subscribers' => $event->getRegistrations()
         ]);
     }
 
-    /**
-     * @Route("/subscriber/{registration}/payed", name="admin_event_subscriber_payed")
-     */
-    public function subscriberPayed(EventRegistration $registration, EntityManagerInterface $em, AppMailer $mailer)
+    #[Route('/subscriber/{registration}/payed', name: 'admin_event_subscriber_payed')]
+    public function subscriberPayed(EventRegistration $registration, EntityManagerInterface $em, AppMailer $mailer): RedirectResponse
     {
         if ($registration->getStatus() === EventRegistration::STATUS_CONFIRMED) {
             $mailer->sendEventPayedRegistration($registration);
@@ -104,10 +92,8 @@ class AdminEventController extends AbstractController
         return $this->redirectToRoute('admin_event_subscribers', ['event' => $registration->getEvent()->getId()]);
     }
 
-    /**
-     * @Route("/subscriber/{registration}/remove", name="admin_event_subscriber_remove")
-     */
-    public function subscriberRemove(EventRegistration $registration, EntityManagerInterface $em)
+    #[Route('/subscriber/{registration}/remove', name: 'admin_event_subscriber_remove')]
+    public function subscriberRemove(EventRegistration $registration, EntityManagerInterface $em): RedirectResponse
     {
         $eventId = $registration->getEvent()->getId();
 
@@ -117,10 +103,8 @@ class AdminEventController extends AbstractController
         return $this->redirectToRoute('admin_event_subscribers', ['event' => $eventId]);
     }
 
-    /**
-     * @Route("/subscriber/{registration}/resend", name="admin_event_subscriber_resend")
-     */
-    public function subscriberResendMail(EventRegistration $registration, AppMailer $mailer)
+    #[Route('/subscriber/{registration}/resend', name: 'admin_event_subscriber_resend')]
+    public function subscriberResendMail(EventRegistration $registration, AppMailer $mailer): RedirectResponse
     {
         switch ($registration->getStatus()) {
             case EventRegistration::STATUS_PAYED:

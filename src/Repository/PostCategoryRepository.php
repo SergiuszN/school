@@ -22,7 +22,7 @@ class PostCategoryRepository extends ServiceEntityRepository
     /**
      * @return PostCategory[]
      */
-    public function findAllActive()
+    public function findAllActive(): array
     {
         return $this->createQueryBuilder('pc')
             ->andWhere('pc.isActive = 1')

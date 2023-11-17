@@ -23,7 +23,7 @@ class EventRepository extends ServiceEntityRepository
     /**
      * @return Event[]
      */
-    public function findUpcomings()
+    public function findUpcomings(): array
     {
         return $this->createQueryBuilder('e')
             ->andWhere('e.date > :from')

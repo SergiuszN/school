@@ -21,25 +21,23 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LandingController extends AbstractController
 {
-    /**
-     * @Route("/", name="landing_home")
-     */
-    public function home(EventRepository $eventRepository)
+    #[Route('/', name: 'landing_home')]
+    public function home(EventRepository $eventRepository): Response
     {
         return $this->render('landing/home.html.twig', [
             'events' => $eventRepository->findUpcomings()
         ]);
     }
 
-    /**
-     * @Route("/event-register/{event}", name="landing_register")
-     */
-    public function register(Event $event, EntityManagerInterface $em, Request $request, AppMailer $mailer)
+    #[Route('/event-register/{event}', name: 'landing_register')]
+    public function register(Event $event, EntityManagerInterface $em, Request $request, AppMailer $mailer): RedirectResponse|Response
     {
         if (!$this->isGranted(EventVoter::REGISTER, $event)) {
             throw $this->createNotFoundException();
@@ -72,18 +70,14 @@ class LandingController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/thank-you", name="landing_thank_you")
-     */
-    public function thankYou()
+    #[Route('/thank-you', name: 'landing_thank_you')]
+    public function thankYou(): Response
     {
         return $this->render('landing/thank_you.html.twig');
     }
 
-    /**
-     * @Route("/confirm-registration/{eventRegistration}-{token}", name="landing_confirm_registration")
-     */
-    public function confirmRegistration(EventRegistration $eventRegistration, $token, EntityManagerInterface $em, AppMailer $mailer, TelegramNotify $telegramNotify)
+    #[Route('/confirm-registration/{eventRegistration}-{token}', name: 'landing_confirm_registration')]
+    public function confirmRegistration(EventRegistration $eventRegistration, $token, EntityManagerInterface $em, AppMailer $mailer, TelegramNotify $telegramNotify): RedirectResponse
     {
         if (!$eventRegistration->isValidToken($token)) {
             return $this->redirectToRoute('landing_home');
@@ -102,10 +96,8 @@ class LandingController extends AbstractController
         return $this->redirectToRoute('landing_home');
     }
 
-    /**
-     * @Route("/contact", name="landing_contact")
-     */
-    public function contact(Request $request, AppMailer $mailer)
+    #[Route('/contact', name: 'landing_contact')]
+    public function contact(Request $request, AppMailer $mailer): RedirectResponse|Response
     {
         $form = $this->createForm(ContactType::class)
             ->handleRequest($request);
@@ -121,34 +113,26 @@ class LandingController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/tac", name="landing_tac")
-     */
-    public function tac()
+    #[Route('/tac', name: 'landing_tac')]
+    public function tac(): Response
     {
         return $this->render('landing/tac.html.twig');
     }
 
-    /**
-     * @Route("/pp", name="landing_pp")
-     */
-    public function pp()
+    #[Route('/pp', name: 'landing_pp')]
+    public function pp(): Response
     {
         return $this->render('landing/pp.html.twig');
     }
 
-    /**
-     * @Route("/about", name="landing_about")
-     */
-    public function about()
+    #[Route('/about', name: 'landing_about')]
+    public function about(): Response
     {
         return $this->render('landing/about.html.twig');
     }
 
-    /**
-     * @Route("/blog/{page}", name="landing_blog", defaults={"page" = 1}, requirements={"page" = "\d+"})
-     */
-    public function blog($page, PaginatorInterface $paginator, PostRepository $postRepository, PostCategoryRepository $postCategoryRepository)
+    #[Route('/blog', name: 'landing_blog', requirements: ['page' => '\d+'], defaults: ['page' => 1])]
+    public function blog($page, PaginatorInterface $paginator, PostRepository $postRepository, PostCategoryRepository $postCategoryRepository): Response
     {
         return $this->render('landing/blog.html.twig', [
             'categories' => $postCategoryRepository->findAllActive(),
@@ -157,10 +141,8 @@ class LandingController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/blog/category/{category}/{page}", name="landing_blog_category", defaults={"page" = 1}, requirements={"category" = "\d+", "page" = "\d+"})
-     */
-    public function blogCategory(PostCategory $category, $page, PaginatorInterface $paginator, PostRepository $postRepository, PostCategoryRepository $postCategoryRepository)
+    #[Route('/blog/category/{category}/{page}', name: 'landing_blog_category', requirements: ['category' => '\d+', 'page' => '\d+'], defaults: ['page' => 1])]
+    public function blogCategory(PostCategory $category, $page, PaginatorInterface $paginator, PostRepository $postRepository, PostCategoryRepository $postCategoryRepository): Response
     {
         if (!$category->getIsActive()) {
             throw $this->createNotFoundException();
@@ -173,10 +155,8 @@ class LandingController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/blog/post/{post}", name="landing_blog_post", requirements={"post" = "\d+"})
-     */
-    public function blogPost(Post $post)
+    #[Route('/blog/post/{post}', name: 'landing_blog_post', requirements: ['post' => '\d+'])]
+    public function blogPost(Post $post): Response
     {
         if (!$this->getUser() && !$post->getIsActive()) {
             throw $this->createNotFoundException();
@@ -187,10 +167,8 @@ class LandingController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/testimonials/{page}", name="landing_testimonials", defaults={"page" = 1}, requirements={"page" = "\d+"})
-     */
-    public function testimonials(int $page, Request $request, PaginatorInterface $paginator, EntityManagerInterface $em, TelegramNotify $telegramNotify)
+    #[Route('/testimonials/{page}', name: 'landing_testimonials', requirements: ['page' => '\d+'], defaults: ['page' => 1])]
+    public function testimonials(int $page, Request $request, PaginatorInterface $paginator, EntityManagerInterface $em, TelegramNotify $telegramNotify): RedirectResponse|Response
     {
         $form = $this->createForm(AddTestimonialType::class)
             ->handleRequest($request);
