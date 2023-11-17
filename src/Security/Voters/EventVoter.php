@@ -12,7 +12,7 @@ class EventVoter extends Voter
 {
     const REGISTER = 'register';
 
-    protected function supports($attribute, $subject)
+    protected function supports($attribute, $subject): bool
     {
         if (!in_array($attribute, [self::REGISTER])) {
             return false;
@@ -25,7 +25,7 @@ class EventVoter extends Voter
         return true;
     }
 
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         /** @var Event $subject */
         switch ($attribute) {
@@ -36,7 +36,7 @@ class EventVoter extends Voter
         throw new LogicException('This code should not be reached!');
     }
 
-    private function canRegister(Event $subject)
+    private function canRegister(Event $subject): bool
     {
         $from = new DateTime();
         $to = (new DateTime())->modify(Event::AVAILABLE_FOR_REGISTRATION);
