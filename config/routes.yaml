@@ -3,5 +3,5 @@
 #    controller: App\Controller\DefaultController::index
 artgris_bundle_file_manager:
     resource: "@ArtgrisFileManagerBundle/Controller/ManagerController.php"
-    type:     annotation
+    type:     attribute
     prefix:   /admin/art-file-manager
